@@ -1,13 +1,19 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MEDIVUS - O conhecimento que salva vidas</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
 </head>
 <body>
+
+    <!-- Bolhas mágicas de fundo (efeito relax) -->
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+
     <header class="header">
         <div class="container header-content">
             <div class="logo">
@@ -18,10 +24,34 @@
                 </div>
             </div>
             <nav class="nav">
-                <a href="#plantao">Plantão</a>
-                <a href="#estudo">Estudo</a>
-                <a href="#residente">Residente</a>
-                <button class="btn-primary">Explorar Grátis</button>
+                <div class="dropdown">
+                    <a href="#plantao" class="dropdown-trigger">Plantão ▾</a>
+                    <div class="dropdown-menu">
+                        <a href="#">SOAP Pro com IA</a>
+                        <a href="#">Consultas rápidas</a>
+                        <a href="#">Calculadoras clínicas</a>
+                        <a href="#">Emergências RCP</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a href="#estudo" class="dropdown-trigger">Estudo ▾</a>
+                    <div class="dropdown-menu">
+                        <a href="#">Flashcards com IA</a>
+                        <a href="#">Simulado residência</a>
+                        <a href="#">Biblioteca médica</a>
+                        <a href="#">Cronograma</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a href="#residente" class="dropdown-trigger">Residente ▾</a>
+                    <div class="dropdown-menu">
+                        <a href="#">Mentoria</a>
+                        <a href="#">Cases clínicos</a>
+                        <a href="#">Plano de estudos</a>
+                        <a href="#">Avaliação de desempenho</a>
+                    </div>
+                </div>
+                <button class="btn-primary btn-pulse">Começar Grátis</button>
             </nav>
         </div>
     </header>
@@ -31,13 +61,14 @@
             <div class="hero-content">
                 <div class="badge-group">
                     <span class="badge">✨ Lançamento 2025</span>
+                    <span class="badge badge-highlight">🔓 Sem cadastro</span>
                     <span class="badge">🎯 7 dias grátis</span>
                 </div>
                 <h1 class="hero-title">O conhecimento que <span class="highlight">salva vidas</span></h1>
                 <p class="hero-description">Medicina com inteligência e alma. Tudo o que você precisa para cuidar, aprender e evoluir.</p>
                 <div class="hero-buttons">
-                    <button class="btn-primary btn-large">Explorar Agora →</button>
-                    <button class="btn-secondary">Ver Demo</button>
+                    <button class="btn-primary btn-large btn-pulse">Começar Grátis →</button>
+                    <button class="btn-secondary">▶ Ver Demo</button>
                 </div>
                 <div class="hero-features">
                     <span>🤖 IA integrada</span>
@@ -47,10 +78,10 @@
             </div>
             <div class="hero-stats">
                 <div class="stats-grid">
-                    <div class="stat-card"><div class="stat-icon">📚</div><div class="stat-number">300+</div><div class="stat-label">Guias Clínicos</div></div>
-                    <div class="stat-card"><div class="stat-icon">🎓</div><div class="stat-number">50k+</div><div class="stat-label">Questões</div></div>
-                    <div class="stat-card"><div class="stat-icon">👨‍⚕️</div><div class="stat-number">10k+</div><div class="stat-label">Médicos</div></div>
-                    <div class="stat-card"><div class="stat-icon">❤️</div><div class="stat-number">98%</div><div class="stat-label">Satisfação</div></div>
+                    <div class="stat-card float-anim"><div class="stat-icon">📚</div><div class="stat-number">300+</div><div class="stat-label">Guias Clínicos</div></div>
+                    <div class="stat-card float-anim" style="animation-delay: 0.2s"><div class="stat-icon">🎓</div><div class="stat-number">50k+</div><div class="stat-label">Questões</div></div>
+                    <div class="stat-card float-anim" style="animation-delay: 0.4s"><div class="stat-icon">👨‍⚕️</div><div class="stat-number">10k+</div><div class="stat-label">Médicos</div></div>
+                    <div class="stat-card float-anim" style="animation-delay: 0.6s"><div class="stat-icon">❤️</div><div class="stat-number">98%</div><div class="stat-label">Satisfação</div></div>
                 </div>
             </div>
         </div>
@@ -64,9 +95,9 @@
                 <p class="section-subtitle">Escolha seu caminho e descubra ferramentas que potencializam seu cuidado e conhecimento.</p>
             </div>
             <div class="perfis-grid">
-                <div class="perfil-card"><div class="perfil-icon">💙</div><h3 class="perfil-title">Plantão ⚡</h3><p class="perfil-desc">Decisões rápidas com precisão e confiança</p><ul class="perfil-features"><li>SOAP Pro com IA</li><li>Consultas rápidas</li><li>Calculadoras clínicas</li><li>Emergências RCP</li></ul><a href="#" class="perfil-link">Acessar →</a></div>
-                <div class="perfil-card"><div class="perfil-icon">📚</div><h3 class="perfil-title">Estudo 📚</h3><p class="perfil-desc">Conhecimento profundo com tecnologia de ponta</p><ul class="perfil-features"><li>Flashcards com IA</li><li>Simulado residência</li><li>Biblioteca médica</li><li>Cronograma</li></ul><a href="#" class="perfil-link">Acessar →</a></div>
-                <div class="perfil-card"><div class="perfil-icon">🌟</div><h3 class="perfil-title">Residente 🌟</h3><p class="perfil-desc">A jornada rumo à excelência na especialidade</p><ul class="perfil-features"><li>Mentoria</li><li>Cases clínicos</li><li>Plano de estudos</li><li>Avaliação de desempenho</li></ul><a href="#" class="perfil-link">Acessar →</a></div>
+                <div class="perfil-card reveal"><div class="perfil-icon">💙</div><h3 class="perfil-title">Plantão ⚡</h3><p class="perfil-desc">Decisões rápidas com precisão e confiança</p><ul class="perfil-features"><li>SOAP Pro com IA</li><li>Consultas rápidas</li><li>Calculadoras clínicas</li><li>Emergências RCP</li></ul><a href="#" class="perfil-link">Acessar →</a></div>
+                <div class="perfil-card reveal" style="transition-delay: 0.2s"><div class="perfil-icon">📚</div><h3 class="perfil-title">Estudo 📚</h3><p class="perfil-desc">Conhecimento profundo com tecnologia de ponta</p><ul class="perfil-features"><li>Flashcards com IA</li><li>Simulado residência</li><li>Biblioteca médica</li><li>Cronograma</li></ul><a href="#" class="perfil-link">Acessar →</a></div>
+                <div class="perfil-card reveal" style="transition-delay: 0.4s"><div class="perfil-icon">🌟</div><h3 class="perfil-title">Residente 🌟</h3><p class="perfil-desc">A jornada rumo à excelência na especialidade</p><ul class="perfil-features"><li>Mentoria</li><li>Cases clínicos</li><li>Plano de estudos</li><li>Avaliação de desempenho</li></ul><a href="#" class="perfil-link">Acessar →</a></div>
             </div>
         </div>
     </section>
@@ -78,10 +109,10 @@
                 <button class="btn-link">Ver tudo →</button>
             </div>
             <div class="produtos-grid">
-                <div class="produto-card"><div class="produto-emoji">🩺</div><h4 class="produto-nome">Estetoscópio</h4><div class="produto-preco">R$ 399,90</div><button class="btn-comprar">Comprar</button></div>
-                <div class="produto-card"><div class="produto-emoji">🥼</div><h4 class="produto-nome">Jaleco Premium</h4><div class="produto-preco">R$ 289,90</div><button class="btn-comprar">Comprar</button></div>
-                <div class="produto-card"><div class="produto-emoji">🧰</div><h4 class="produto-nome">Kit Emergência</h4><div class="produto-preco">R$ 159,90</div><button class="btn-comprar">Comprar</button></div>
-                <div class="produto-card"><div class="produto-emoji">📕</div><h4 class="produto-nome">Livro Clínica</h4><div class="produto-preco">R$ 199,90</div><button class="btn-comprar">Comprar</button></div>
+                <div class="produto-card reveal"><div class="produto-emoji">🩺</div><h4 class="produto-nome">Estetoscópio</h4><div class="produto-preco">R$ 399,90</div><button class="btn-comprar">Comprar</button></div>
+                <div class="produto-card reveal" style="transition-delay: 0.2s"><div class="produto-emoji">🥼</div><h4 class="produto-nome">Jaleco Premium</h4><div class="produto-preco">R$ 289,90</div><button class="btn-comprar">Comprar</button></div>
+                <div class="produto-card reveal" style="transition-delay: 0.4s"><div class="produto-emoji">🧰</div><h4 class="produto-nome">Kit Emergência</h4><div class="produto-preco">R$ 159,90</div><button class="btn-comprar">Comprar</button></div>
+                <div class="produto-card reveal" style="transition-delay: 0.6s"><div class="produto-emoji">📕</div><h4 class="produto-nome">Livro Clínica</h4><div class="produto-preco">R$ 199,90</div><button class="btn-comprar">Comprar</button></div>
             </div>
         </div>
     </section>
