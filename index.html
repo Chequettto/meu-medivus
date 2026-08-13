@@ -3,169 +3,174 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MEDIVUS - O conhecimento que salva vidas</title>
+    <title>MEDIVUS - O Conhecimento que Salva Vidas</title>
     <link rel="stylesheet" href="styles.css" />
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
 
     <header class="header">
         <div class="container header-content">
             <div class="logo">
-                <span class="logo-icon">💙</span>
+                <i data-lucide="activity" class="logo-icon-svg"></i>
                 <div>
                     <span class="logo-text">MEDIVUS</span>
                     <span class="logo-sub">Intelligentia Clinica</span>
                 </div>
             </div>
             <nav class="nav">
-                <div class="dropdown">
-                    <a href="#plantao" class="dropdown-trigger">Plantão ▾</a>
-                    <div class="dropdown-menu">
-                        <a href="#">SOAP Pro com IA</a>
-                        <a href="#">Consultas rápidas</a>
-                        <a href="#">Calculadoras clínicas</a>
-                        <a href="#">Emergências RCP</a>
-                    </div>
-                </div>
-                <div class="dropdown">
-                    <a href="#estudo" class="dropdown-trigger">Estudo ▾</a>
-                    <div class="dropdown-menu">
-                        <a href="#">Flashcards com IA</a>
-                        <a href="#">Simulado residência</a>
-                        <a href="#">Biblioteca médica</a>
-                        <a href="#">Cronograma</a>
-                    </div>
-                </div>
-                <div class="dropdown">
-                    <a href="#residente" class="dropdown-trigger">Residente ▾</a>
-                    <div class="dropdown-menu">
-                        <a href="#">Mentoria</a>
-                        <a href="#">Cases clínicos</a>
-                        <a href="#">Plano de estudos</a>
-                        <a href="#">Avaliação de desempenho</a>
-                    </div>
-                </div>
-                <button class="btn-primary">Começar Grátis</button>
+                <a href="#simulador" class="nav-link">Testar IA</a>
+                <a href="#recursos" class="nav-link">Recursos</a>
+                <a href="#planos" class="nav-link highlight-link">Planos</a>
+                <button id="theme-toggle" class="btn-icon" aria-label="Modo Noturno">
+                    <i data-lucide="moon"></i>
+                </button>
             </nav>
         </div>
     </header>
 
-    <!-- HERO - LIMPO E PREMIUM -->
-    <section class="hero">
+    <section class="hero" id="simulador">
         <div class="container hero-grid">
             <div class="hero-content">
                 <div class="badge-group">
-                    <span class="badge">✨ Lançamento 2025</span>
-                    <span class="badge badge-highlight">🔓 Sem cadastro</span>
+                    <span class="badge badge-amber">⚡ Exclusivo para Médicos</span>
                 </div>
                 <h1 class="hero-title">
-                    O conhecimento que <br />
-                    <span class="highlight">salva vidas</span>
+                    Chega de perder horas digitando prontuários no <span class="highlight">plantão.</span>
                 </h1>
                 <p class="hero-description">
-                    Medicina com inteligência e alma. Tudo o que você precisa para cuidar, aprender e evoluir.
+                    O primeiro assistente clínico de elite. Gera evoluções SOAP, cálculos precisos e condutas atualizadas em menos de 3 segundos.
                 </p>
-                <div class="hero-buttons">
-                    <button class="btn-primary btn-large">Começar Grátis →</button>
-                    <button class="btn-secondary">▶ Ver Demo</button>
-                </div>
                 <div class="hero-features">
-                    <span>🤖 IA integrada</span>
-                    <span>👥 Comunidade</span>
-                    <span>📱 Multiplataforma</span>
+                    <span><i data-lucide="check-circle-2"></i> SOAP Automático</span>
+                    <span><i data-lucide="copy"></i> Copia e Cola no MV/TOTVS</span>
+                    <span><i data-lucide="wifi-off"></i> Funciona Offline</span>
                 </div>
             </div>
+            
+            <!-- SIMULADOR DE IA -->
             <div class="hero-visual">
-                <div class="hero-card-visual">
-                    <div class="hc-icon">💙</div>
-                    <div class="hc-stats">
-                        <div><span>300+</span> Guias</div>
-                        <div><span>50k+</span> Questões</div>
-                        <div><span>10k+</span> Médicos</div>
-                        <div><span>98%</span> Satisfação</div>
+                <div class="ia-simulator">
+                    <div class="simulator-header">
+                        <i data-lucide="bot"></i> Simulador SOAP Pro
+                    </div>
+                    <div class="simulator-body">
+                        <label>Digite como falaria no plantão:</label>
+                        <textarea id="ia-input" rows="3" placeholder="Ex: Paciente 45 anos, masculino, dor torácica atípica há 2h, PA 150x90..."></textarea>
+                        <button id="btn-gerar" class="btn-primary btn-block">Gerar Prontuário Inteligente <i data-lucide="zap"></i></button>
+                        
+                        <div id="ia-result" class="ia-result hidden">
+                            <div class="result-content" id="result-text"></div>
+                            <button id="btn-copy" class="btn-secondary btn-small"><i data-lucide="copy"></i> Copiar para Prontuário Eletrônico</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- PERFIS -->
-    <section class="perfis" id="plantao">
+    <section class="perfis" id="recursos">
         <div class="container">
             <div class="section-header">
-                <span class="section-tag">Jornada</span>
-                <h2 class="section-title">Para cada momento da sua <span class="highlight">carreira</span></h2>
-                <p class="section-subtitle">Escolha seu perfil e acesse ferramentas exclusivas</p>
+                <h2 class="section-title">O Fator "Uau" da sua <span class="highlight">Rotina</span></h2>
+                <p class="section-subtitle">Ferramentas mágicas projetadas para zerar o estresse clínico</p>
             </div>
             <div class="perfis-grid">
-                <div class="perfil-card reveal">
-                    <div class="perfil-icon">⚡</div>
-                    <h3>Plantão</h3>
-                    <p>Decisões rápidas com precisão</p>
-                    <ul>
-                        <li>SOAP Pro com IA</li>
-                        <li>Consultas rápidas</li>
-                        <li>Calculadoras</li>
-                        <li>Emergências RCP</li>
-                    </ul>
-                    <a href="#" class="perfil-link">Acessar →</a>
+                <div class="perfil-card">
+                    <div class="perfil-icon"><i data-lucide="copy-check"></i></div>
+                    <h3>Copia e Cola Instantâneo</h3>
+                    <p>O texto do SOAP já sai formatado perfeitamente. Um clique e você cola no sistema do hospital sem precisar reformatar linhas.</p>
                 </div>
-                <div class="perfil-card reveal" style="transition-delay: 0.15s">
-                    <div class="perfil-icon">📚</div>
-                    <h3>Estudo</h3>
-                    <p>Tecnologia para aprender mais</p>
-                    <ul>
-                        <li>Flashcards com IA</li>
-                        <li>Simulado residência</li>
-                        <li>Biblioteca</li>
-                        <li>Cronograma</li>
-                    </ul>
-                    <a href="#" class="perfil-link">Acessar →</a>
+                <div class="perfil-card">
+                    <div class="perfil-icon"><i data-lucide="moon-star"></i></div>
+                    <h3>Modo Plantão Noturno</h3>
+                    <p>Interface OLED True-Black com redução de luz azul. Não cansa os olhos durante o plantão da madrugada.</p>
                 </div>
-                <div class="perfil-card reveal" style="transition-delay: 0.3s">
-                    <div class="perfil-icon">🌟</div>
-                    <h3>Residente</h3>
-                    <p>Excelência na especialidade</p>
-                    <ul>
-                        <li>Mentoria</li>
-                        <li>Cases clínicos</li>
-                        <li>Plano de estudos</li>
-                        <li>Avaliação</li>
-                    </ul>
-                    <a href="#" class="perfil-link">Acessar →</a>
+                <div class="perfil-card">
+                    <div class="perfil-icon"><i data-lucide="activity-square"></i></div>
+                    <h3>Calculadoras Visuais</h3>
+                    <p>Esqueça digitar números. Use sliders visuais na tela para calcular Nora, Fentanil e Dobutamina instantaneamente.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- PRODUTOS -->
-    <section class="produtos">
+    <!-- CHECKOUT MERCADO PAGO -->
+    <section class="pricing-section" id="planos">
         <div class="container">
-            <div class="produtos-header">
-                <div>
-                    <span class="section-tag">Loja</span>
-                    <h2 class="section-title">Produtos para sua <span class="highlight">prática</span></h2>
-                </div>
-                <button class="btn-link">Ver tudo →</button>
+            <div class="section-header">
+                <span class="section-tag" style="background: var(--amber); color: white; padding: 4px 12px; border-radius: 20px; font-weight: bold;">Acesso Imediato</span>
+                <h2 class="section-title">O lugar ideal para <span class="highlight">trabalhar</span></h2>
+                <p class="section-subtitle">Sem burocracia. Pagamento processado pelo Mercado Pago. Cancele quando quiser.</p>
             </div>
-            <div class="produtos-grid">
-                <div class="produto-card reveal"><div class="produto-emoji">🩺</div><h4>Estetoscópio</h4><div class="produto-preco">R$ 399,90</div><button class="btn-comprar">Comprar</button></div>
-                <div class="produto-card reveal" style="transition-delay: 0.15s"><div class="produto-emoji">🥼</div><h4>Jaleco Premium</h4><div class="produto-preco">R$ 289,90</div><button class="btn-comprar">Comprar</button></div>
-                <div class="produto-card reveal" style="transition-delay: 0.3s"><div class="produto-emoji">🧰</div><h4>Kit Emergência</h4><div class="produto-preco">R$ 159,90</div><button class="btn-comprar">Comprar</button></div>
-                <div class="produto-card reveal" style="transition-delay: 0.45s"><div class="produto-emoji">📕</div><h4>Livro Clínica</h4><div class="produto-preco">R$ 199,90</div><button class="btn-comprar">Comprar</button></div>
+
+            <div class="pricing-grid">
+                <!-- MENSAL -->
+                <div class="pricing-card">
+                    <div class="card-header">
+                        <h3>Pro Plantão Mensal</h3>
+                        <p>Flexibilidade total para o dia a dia</p>
+                    </div>
+                    <div class="price">
+                        <span class="currency">R$</span>
+                        <span class="amount">49</span><span class="cents">,90</span>
+                        <span class="period">/mês</span>
+                    </div>
+                    <ul class="features-list">
+                        <li><i data-lucide="check"></i> SOAP Pro com IA Ilimitado</li>
+                        <li><i data-lucide="check"></i> Calculadoras & Protocolos Offline</li>
+                        <li><i data-lucide="check"></i> Suporte Prioritário</li>
+                    </ul>
+                    <!-- COLE SEU LINK DO MERCADO PAGO AQUI -->
+                    <a href="https://mpago.la/SEU_LINK_MENSAL" target="_blank" class="btn-secondary btn-block mp-btn">Assinar Plano Mensal</a>
+                </div>
+
+                <!-- ANUAL -->
+                <div class="pricing-card featured">
+                    <div class="badge-pop">MAIS POPULAR • ECONOMIZE 33%</div>
+                    <div class="card-header">
+                        <h3>VIP Anual Passaporte</h3>
+                        <p>Para quem quer dominar a medicina</p>
+                    </div>
+                    <div class="price">
+                        <span class="currency">R$</span>
+                        <span class="amount">399</span><span class="cents">,00</span>
+                        <span class="period">/ano</span>
+                    </div>
+                    <p class="equivalent">Equivalente a apenas R$ 33,25/mês</p>
+                    <ul class="features-list">
+                        <li><i data-lucide="check"></i> <strong>Tudo do Plano Mensal</strong></li>
+                        <li><i data-lucide="check"></i> Flashcards e Simulados Inteligentes</li>
+                        <li><i data-lucide="check"></i> Casos Clínicos Avançados</li>
+                        <li><i data-lucide="check"></i> Acesso Antecipado a Novas IAs</li>
+                    </ul>
+                    <!-- COLE SEU LINK DO MERCADO PAGO AQUI -->
+                    <a href="https://mpago.la/SEU_LINK_ANUAL" target="_blank" class="btn-primary btn-block mp-btn">Assinar VIP Anual ➔</a>
+                </div>
+            </div>
+            
+            <div class="mp-trust">
+                <i data-lucide="lock"></i> Pagamento 100% Seguro processado via Mercado Pago (PIX e Cartão)
             </div>
         </div>
     </section>
 
     <footer class="footer">
         <div class="container footer-grid">
-            <div><div class="footer-logo"><span>💙</span><span>MEDIVUS</span></div><p class="footer-desc">O conhecimento que salva vidas.</p></div>
-            <div><h5>Perfis</h5><ul><li><a href="#">Plantão</a></li><li><a href="#">Estudo</a></li><li><a href="#">Residente</a></li></ul></div>
-            <div><h5>Sobre</h5><ul><li><a href="#">Quem somos</a></li><li><a href="#">Contato</a></li><li><a href="#">Termos</a></li></ul></div>
-            <div><h5>Redes</h5><div class="footer-social"><span>🐙</span><span>📸</span><span>🐦</span><span>💼</span></div></div>
+            <div>
+                <div class="logo-text" style="color: white; font-size: 1.5rem; margin-bottom: 1rem;">MEDIVUS</div>
+                <p>O conhecimento que salva vidas.</p>
+            </div>
+            <div>
+                <h5>Recursos</h5>
+                <ul><li><a href="#">SOAP Pro</a></li><li><a href="#">Calculadoras</a></li></ul>
+            </div>
+            <div>
+                <h5>Embaixadores</h5>
+                <ul><li><a href="#">Plano de Carreira Médico</a></li><li><a href="#">Área do Afiliado</a></li></ul>
+            </div>
         </div>
-        <div class="footer-bottom">© 2025 MEDIVUS — Feito com ❤️ para a medicina.</div>
     </footer>
 
     <script src="script.js"></script>
