@@ -5,14 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MEDIVUS - O conhecimento que salva vidas</title>
     <link rel="stylesheet" href="styles.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
 </head>
 <body>
-
-    <!-- Bolhas mágicas de fundo (efeito relax) -->
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-    <div class="orb orb-3"></div>
 
     <header class="header">
         <div class="container header-content">
@@ -51,80 +46,126 @@
                         <a href="#">Avaliação de desempenho</a>
                     </div>
                 </div>
-                <button class="btn-primary btn-pulse">Começar Grátis</button>
+                <button class="btn-primary">Começar Grátis</button>
             </nav>
         </div>
     </header>
 
+    <!-- HERO - LIMPO E PREMIUM -->
     <section class="hero">
         <div class="container hero-grid">
             <div class="hero-content">
                 <div class="badge-group">
                     <span class="badge">✨ Lançamento 2025</span>
                     <span class="badge badge-highlight">🔓 Sem cadastro</span>
-                    <span class="badge">🎯 7 dias grátis</span>
                 </div>
-                <h1 class="hero-title">O conhecimento que <span class="highlight">salva vidas</span></h1>
-                <p class="hero-description">Medicina com inteligência e alma. Tudo o que você precisa para cuidar, aprender e evoluir.</p>
+                <h1 class="hero-title">
+                    O conhecimento que <br />
+                    <span class="highlight">salva vidas</span>
+                </h1>
+                <p class="hero-description">
+                    Medicina com inteligência e alma. Tudo o que você precisa para cuidar, aprender e evoluir.
+                </p>
                 <div class="hero-buttons">
-                    <button class="btn-primary btn-large btn-pulse">Começar Grátis →</button>
+                    <button class="btn-primary btn-large">Começar Grátis →</button>
                     <button class="btn-secondary">▶ Ver Demo</button>
                 </div>
                 <div class="hero-features">
                     <span>🤖 IA integrada</span>
-                    <span>🔓 Sem cadastro</span>
                     <span>👥 Comunidade</span>
+                    <span>📱 Multiplataforma</span>
                 </div>
             </div>
-            <div class="hero-stats">
-                <div class="stats-grid">
-                    <div class="stat-card float-anim"><div class="stat-icon">📚</div><div class="stat-number">300+</div><div class="stat-label">Guias Clínicos</div></div>
-                    <div class="stat-card float-anim" style="animation-delay: 0.2s"><div class="stat-icon">🎓</div><div class="stat-number">50k+</div><div class="stat-label">Questões</div></div>
-                    <div class="stat-card float-anim" style="animation-delay: 0.4s"><div class="stat-icon">👨‍⚕️</div><div class="stat-number">10k+</div><div class="stat-label">Médicos</div></div>
-                    <div class="stat-card float-anim" style="animation-delay: 0.6s"><div class="stat-icon">❤️</div><div class="stat-number">98%</div><div class="stat-label">Satisfação</div></div>
+            <div class="hero-visual">
+                <div class="hero-card-visual">
+                    <div class="hc-icon">💙</div>
+                    <div class="hc-stats">
+                        <div><span>300+</span> Guias</div>
+                        <div><span>50k+</span> Questões</div>
+                        <div><span>10k+</span> Médicos</div>
+                        <div><span>98%</span> Satisfação</div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- PERFIS -->
     <section class="perfis" id="plantao">
         <div class="container">
             <div class="section-header">
                 <span class="section-tag">Jornada</span>
-                <h2 class="section-title">Para cada momento da sua <span class="highlight">carreira médica</span></h2>
-                <p class="section-subtitle">Escolha seu caminho e descubra ferramentas que potencializam seu cuidado e conhecimento.</p>
+                <h2 class="section-title">Para cada momento da sua <span class="highlight">carreira</span></h2>
+                <p class="section-subtitle">Escolha seu perfil e acesse ferramentas exclusivas</p>
             </div>
             <div class="perfis-grid">
-                <div class="perfil-card reveal"><div class="perfil-icon">💙</div><h3 class="perfil-title">Plantão ⚡</h3><p class="perfil-desc">Decisões rápidas com precisão e confiança</p><ul class="perfil-features"><li>SOAP Pro com IA</li><li>Consultas rápidas</li><li>Calculadoras clínicas</li><li>Emergências RCP</li></ul><a href="#" class="perfil-link">Acessar →</a></div>
-                <div class="perfil-card reveal" style="transition-delay: 0.2s"><div class="perfil-icon">📚</div><h3 class="perfil-title">Estudo 📚</h3><p class="perfil-desc">Conhecimento profundo com tecnologia de ponta</p><ul class="perfil-features"><li>Flashcards com IA</li><li>Simulado residência</li><li>Biblioteca médica</li><li>Cronograma</li></ul><a href="#" class="perfil-link">Acessar →</a></div>
-                <div class="perfil-card reveal" style="transition-delay: 0.4s"><div class="perfil-icon">🌟</div><h3 class="perfil-title">Residente 🌟</h3><p class="perfil-desc">A jornada rumo à excelência na especialidade</p><ul class="perfil-features"><li>Mentoria</li><li>Cases clínicos</li><li>Plano de estudos</li><li>Avaliação de desempenho</li></ul><a href="#" class="perfil-link">Acessar →</a></div>
+                <div class="perfil-card reveal">
+                    <div class="perfil-icon">⚡</div>
+                    <h3>Plantão</h3>
+                    <p>Decisões rápidas com precisão</p>
+                    <ul>
+                        <li>SOAP Pro com IA</li>
+                        <li>Consultas rápidas</li>
+                        <li>Calculadoras</li>
+                        <li>Emergências RCP</li>
+                    </ul>
+                    <a href="#" class="perfil-link">Acessar →</a>
+                </div>
+                <div class="perfil-card reveal" style="transition-delay: 0.15s">
+                    <div class="perfil-icon">📚</div>
+                    <h3>Estudo</h3>
+                    <p>Tecnologia para aprender mais</p>
+                    <ul>
+                        <li>Flashcards com IA</li>
+                        <li>Simulado residência</li>
+                        <li>Biblioteca</li>
+                        <li>Cronograma</li>
+                    </ul>
+                    <a href="#" class="perfil-link">Acessar →</a>
+                </div>
+                <div class="perfil-card reveal" style="transition-delay: 0.3s">
+                    <div class="perfil-icon">🌟</div>
+                    <h3>Residente</h3>
+                    <p>Excelência na especialidade</p>
+                    <ul>
+                        <li>Mentoria</li>
+                        <li>Cases clínicos</li>
+                        <li>Plano de estudos</li>
+                        <li>Avaliação</li>
+                    </ul>
+                    <a href="#" class="perfil-link">Acessar →</a>
+                </div>
             </div>
         </div>
     </section>
 
+    <!-- PRODUTOS -->
     <section class="produtos">
         <div class="container">
             <div class="produtos-header">
-                <div><span class="section-tag">Loja</span><h2 class="section-title">Produtos para sua <span class="highlight">prática</span></h2></div>
+                <div>
+                    <span class="section-tag">Loja</span>
+                    <h2 class="section-title">Produtos para sua <span class="highlight">prática</span></h2>
+                </div>
                 <button class="btn-link">Ver tudo →</button>
             </div>
             <div class="produtos-grid">
-                <div class="produto-card reveal"><div class="produto-emoji">🩺</div><h4 class="produto-nome">Estetoscópio</h4><div class="produto-preco">R$ 399,90</div><button class="btn-comprar">Comprar</button></div>
-                <div class="produto-card reveal" style="transition-delay: 0.2s"><div class="produto-emoji">🥼</div><h4 class="produto-nome">Jaleco Premium</h4><div class="produto-preco">R$ 289,90</div><button class="btn-comprar">Comprar</button></div>
-                <div class="produto-card reveal" style="transition-delay: 0.4s"><div class="produto-emoji">🧰</div><h4 class="produto-nome">Kit Emergência</h4><div class="produto-preco">R$ 159,90</div><button class="btn-comprar">Comprar</button></div>
-                <div class="produto-card reveal" style="transition-delay: 0.6s"><div class="produto-emoji">📕</div><h4 class="produto-nome">Livro Clínica</h4><div class="produto-preco">R$ 199,90</div><button class="btn-comprar">Comprar</button></div>
+                <div class="produto-card reveal"><div class="produto-emoji">🩺</div><h4>Estetoscópio</h4><div class="produto-preco">R$ 399,90</div><button class="btn-comprar">Comprar</button></div>
+                <div class="produto-card reveal" style="transition-delay: 0.15s"><div class="produto-emoji">🥼</div><h4>Jaleco Premium</h4><div class="produto-preco">R$ 289,90</div><button class="btn-comprar">Comprar</button></div>
+                <div class="produto-card reveal" style="transition-delay: 0.3s"><div class="produto-emoji">🧰</div><h4>Kit Emergência</h4><div class="produto-preco">R$ 159,90</div><button class="btn-comprar">Comprar</button></div>
+                <div class="produto-card reveal" style="transition-delay: 0.45s"><div class="produto-emoji">📕</div><h4>Livro Clínica</h4><div class="produto-preco">R$ 199,90</div><button class="btn-comprar">Comprar</button></div>
             </div>
         </div>
     </section>
 
     <footer class="footer">
         <div class="container footer-grid">
-            <div><div class="footer-logo"><span>💙</span><span class="footer-logo-text">MEDIVUS</span></div><p class="footer-desc">O conhecimento que salva vidas.<br>Medicina com inteligência e alma.</p></div>
-            <div><h5 class="footer-title">Perfis</h5><ul class="footer-links"><li><a href="#">Plantão</a></li><li><a href="#">Estudo</a></li><li><a href="#">Residente</a></li></ul></div>
-            <div><h5 class="footer-title">Sobre</h5><ul class="footer-links"><li><a href="#">Quem somos</a></li><li><a href="#">Contato</a></li><li><a href="#">Termos</a></li></ul></div>
-            <div><h5 class="footer-title">Redes</h5><div class="footer-social"><span>🐙</span><span>📸</span><span>🐦</span><span>💼</span></div></div>
+            <div><div class="footer-logo"><span>💙</span><span>MEDIVUS</span></div><p class="footer-desc">O conhecimento que salva vidas.</p></div>
+            <div><h5>Perfis</h5><ul><li><a href="#">Plantão</a></li><li><a href="#">Estudo</a></li><li><a href="#">Residente</a></li></ul></div>
+            <div><h5>Sobre</h5><ul><li><a href="#">Quem somos</a></li><li><a href="#">Contato</a></li><li><a href="#">Termos</a></li></ul></div>
+            <div><h5>Redes</h5><div class="footer-social"><span>🐙</span><span>📸</span><span>🐦</span><span>💼</span></div></div>
         </div>
-        <div class="footer-bottom">© 2025 MEDIVUS — O conhecimento que salva vidas. Feito com ❤️ para a medicina.</div>
+        <div class="footer-bottom">© 2025 MEDIVUS — Feito com ❤️ para a medicina.</div>
     </footer>
 
     <script src="script.js"></script>
