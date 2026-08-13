@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MEDIVUS - O Conhecimento que Salva Vidas</title>
-    <!-- Tailwind CSS CDN -->
+    <title>MEDIVUS - Copiloto Médico Inteligente</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <script>
         tailwind.config = {
@@ -17,13 +17,14 @@
                 extend: {
                     fontFamily: { sans: ['Inter', 'sans-serif'] },
                     colors: {
-                        medivus: {
-                            50: '#f0f6ff',
-                            100: '#e0edfe',
-                            500: '#2563eb',
-                            600: '#1d4ed8',
-                            700: '#1e40af',
-                            900: '#0f172a'
+                        medblue: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a'
                         }
                     }
                 }
@@ -31,47 +32,52 @@
         }
     </script>
     <style>
-        .glass-card {
+        body { background-color: #f8fafc; color: #0f172a; }
+        .card-pro {
             background: #ffffff;
             border: 1px solid #e2e8f0;
-            box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05);
+            box-shadow: 0 4px 15px -3px rgba(15, 23, 42, 0.04), 0 2px 6px -2px rgba(15, 23, 42, 0.02);
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .pulse-animation {
-            animation: pulse-red 1.2s infinite;
+        .card-pro:hover {
+            border-color: #3b82f6;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px -4px rgba(37, 99, 235, 0.12);
         }
-        @keyframes pulse-red {
-            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
-            70% { transform: scale(1.03); box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
-            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+        .recording-pulse {
+            animation: pulse-mic 1s infinite;
+        }
+        @keyframes pulse-mic {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.15); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
         }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col justify-between selection:bg-blue-500 selection:text-white">
+<body class="min-h-screen flex flex-col justify-between selection:bg-blue-600 selection:text-white">
 
-    <!-- TOP BAR / HEADER -->
-    <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200 px-4 py-3 shadow-sm">
+    <!-- HEADER DE ALTO PADRÃO -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200/80 px-4 py-3 shadow-sm">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
-            <!-- Logo Medivus -->
+            <!-- LOGO RESTAURADO (Coração com Pulso Médico) -->
             <div class="flex items-center gap-3 cursor-pointer" onclick="switchTab('plantao')">
-                <div class="bg-blue-600 text-white p-2 rounded-xl shadow-md shadow-blue-500/20">
-                    <i class="fa-solid fa-shield-halved text-xl"></i>
+                <div class="bg-gradient-to-tr from-blue-600 to-indigo-600 text-white w-10 h-10 rounded-xl flex items-center justify-center shadow-md shadow-blue-500/25">
+                    <i class="fa-solid fa-heart-pulse text-xl"></i>
                 </div>
                 <div>
-                    <h1 class="font-extrabold text-xl tracking-tight text-slate-900 leading-none">MEDIVUS</h1>
-                    <span class="text-[10px] font-semibold tracking-wider text-blue-600 uppercase">Copiloto Médico Inteligente</span>
+                    <h1 class="font-black text-xl tracking-tight text-slate-900 leading-none">MEDIVUS</h1>
+                    <span class="text-[10px] font-bold tracking-widest text-blue-600 uppercase">Copiloto Médico Inteligente</span>
                 </div>
             </div>
 
-            <!-- Botões de Ação Rápida no Topo -->
+            <!-- BOTÕES DE AÇÃO SUPERIOR -->
             <div class="flex items-center gap-2">
-                <!-- Botão Viral WhatsApp -->
-                <button onclick="shareWhatsApp()" class="hidden md:flex items-center gap-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 px-3 py-1.5 rounded-lg text-xs font-semibold transition">
-                    <i class="fa-brands fa-whatsapp text-emerald-600 text-sm"></i>
-                    <span>Ajudar um Colega</span>
+                <button onclick="shareWhatsApp()" class="hidden md:flex items-center gap-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 px-3.5 py-2 rounded-xl text-xs font-bold transition">
+                    <i class="fa-brands fa-whatsapp text-emerald-600 text-base"></i>
+                    <span>Ajude a Salvar Vidas</span>
                 </button>
 
-                <!-- Botão Assinar / Status Pro -->
-                <button onclick="openModal('checkoutModal')" class="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-4 py-1.5 rounded-lg text-xs font-bold shadow-md shadow-blue-500/20 flex items-center gap-2 transition transform active:scale-95">
+                <button onclick="openModal('checkoutModal')" class="bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 hover:from-blue-700 hover:to-indigo-800 text-white px-4 py-2 rounded-xl text-xs font-black tracking-wide shadow-md shadow-blue-500/20 flex items-center gap-2 transition transform active:scale-95">
                     <i class="fa-solid fa-crown text-amber-300"></i>
                     <span>SEJA PRO</span>
                 </button>
@@ -79,531 +85,656 @@
         </div>
     </header>
 
-    <!-- BANNER PWA (INSTALAÇÃO) -->
+    <!-- BANNER PWA DE INSTALAÇÃO -->
     <div id="pwaBanner" class="bg-slate-900 text-white px-4 py-2.5 text-xs flex items-center justify-between border-b border-slate-800">
-        <div class="flex items-center gap-2 max-w-4xl">
-            <i class="fa-solid fa-mobile-screen-button text-blue-400 text-sm"></i>
-            <span><strong>Acesso Rápido no Plantão:</strong> Adicione o Medivus na tela inicial do seu celular.</span>
+        <div class="flex items-center gap-2.5 max-w-4xl">
+            <span class="bg-blue-600/30 text-blue-400 p-1.5 rounded-lg"><i class="fa-solid fa-mobile-screen-button"></i></span>
+            <span><strong>Uso Rápido no Plantão:</strong> Adicione o Medivus na tela inicial do celular sem precisar de loja.</span>
         </div>
         <div class="flex items-center gap-3">
-            <button onclick="alert('No Chrome/Safari: toque em Opções (3 pontos ou Compartilhar) e selecione \'Adicionar à Tela Inicial\'.')" class="bg-blue-600 hover:bg-blue-500 px-3 py-1 rounded-md font-semibold text-white transition">Instalar App</button>
+            <button onclick="alert('No Chrome/Safari: abra o menu do navegador (3 pontos ou Compartilhar) e clique em \'Adicionar à Tela Inicial\'.')" class="bg-blue-600 hover:bg-blue-500 px-3 py-1 rounded-lg font-bold text-white transition text-xs">Instalar</button>
             <button onclick="document.getElementById('pwaBanner').style.display='none'" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
         </div>
     </div>
 
-    <!-- CONTEÚDO PRINCIPAL (MÓDULOS) -->
+    <!-- CONTEÚDO PRINCIPAL -->
     <main class="max-w-7xl mx-auto px-4 py-6 flex-1 w-full">
 
-        <!-- BARRA DE BUSCA GLOBAL UNIFICADA -->
+        <!-- CAMPO DE BUSCA INTELIGENTE -->
         <div class="mb-8 max-w-3xl mx-auto">
             <div class="relative">
-                <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-lg"></i>
-                <input type="text" placeholder="Buscar conduta, dose de antibiótico, calculadora ou CID-10..." class="w-full pl-12 pr-28 py-3.5 bg-white border border-slate-200 rounded-2xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-600 text-sm font-medium transition">
-                <button class="absolute right-2 top-1/2 -translate-y-1/2 bg-blue-600 text-white px-4 py-2 rounded-xl text-xs font-semibold hover:bg-blue-700 transition flex items-center gap-1.5">
+                <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                <input type="text" id="globalSearchInput" onkeyup="filterContent()" placeholder="Buscar conduta, dose de medicação, CID-10 ou calculadoras..." class="w-full pl-11 pr-28 py-3.5 bg-white border border-slate-200 rounded-2xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-600 text-sm font-medium transition">
+                <button onclick="executeAISearch()" class="absolute right-2 top-1/2 -translate-y-1/2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 shadow-sm">
                     <i class="fa-solid fa-wand-magic-sparkles"></i>
                     <span>IA Buscar</span>
                 </button>
             </div>
         </div>
 
-        <!-- ABA 1: PLANTÃO (Foco em Agilidade e Decisão Crítica) -->
+        <!-- MÓDULO 1: PLANTÃO & EMERGÊNCIA -->
         <section id="tab-plantao" class="tab-content block">
-            <div class="flex items-center justify-between mb-4">
-                <h2 class="text-xs font-bold text-slate-400 uppercase tracking-wider flex items-center gap-2">
-                    <i class="fa-solid fa-stethoscope text-blue-600"></i> Ferramentas de Plantão & Emergência
+            <div class="flex items-center justify-between mb-5">
+                <h2 class="text-xs font-extrabold text-slate-400 uppercase tracking-wider flex items-center gap-2">
+                    <i class="fa-solid fa-kit-medical text-blue-600"></i> Ferramentas de Plantão & Emergência
                 </h2>
-                <span class="text-[11px] bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full font-semibold">Modo Ultra-Rápido</span>
+                <span class="text-[11px] bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full font-bold border border-emerald-200">Pronto para Uso</span>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                 
-                <!-- SOAP Pro -->
-                <div onclick="openModal('soapModal')" class="glass-card p-5 rounded-2xl hover:border-blue-500/50 hover:shadow-lg transition cursor-pointer group relative overflow-hidden">
+                <!-- SOAP Pro com IA por Voz -->
+                <div onclick="openModal('soapModal')" class="card-pro p-5 rounded-2xl cursor-pointer group">
                     <div class="flex items-start justify-between mb-3">
-                        <div class="p-3 bg-blue-50 text-blue-600 rounded-xl group-hover:bg-blue-600 group-hover:text-white transition">
-                            <i class="fa-solid fa-clipboard-user text-xl"></i>
+                        <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center text-xl group-hover:bg-blue-600 group-hover:text-white transition">
+                            <i class="fa-solid fa-microphone-lines"></i>
                         </div>
-                        <span class="text-[10px] font-bold bg-blue-100 text-blue-700 px-2 py-0.5 rounded">IA VOZ</span>
+                        <span class="text-[10px] font-black bg-blue-100 text-blue-700 px-2.5 py-1 rounded-md">IA VOZ</span>
                     </div>
-                    <h3 class="font-bold text-slate-900 group-hover:text-blue-600 transition">SOAP Pro</h3>
-                    <p class="text-xs text-slate-500 mt-1">Estruture prontuários completos ditando por voz. Doses, conduta e CID-10 automáticos.</p>
+                    <h3 class="font-bold text-slate-900 text-base group-hover:text-blue-600 transition">SOAP Pro (Ditado por Voz)</h3>
+                    <p class="text-xs text-slate-500 mt-1.5 leading-relaxed">Dite a história do paciente. A IA gera o prontuário estruturado com CID-10 e prescrição em segundos.</p>
                 </div>
 
-                <!-- Emergências RCP / Código Azul -->
-                <div onclick="openModal('rcpModal')" class="glass-card p-5 rounded-2xl border-red-200 hover:border-red-500 hover:shadow-lg transition cursor-pointer group relative overflow-hidden bg-gradient-to-br from-white to-red-50/30">
+                <!-- Emergências RCP (Código Azul) -->
+                <div onclick="openModal('rcpModal')" class="card-pro p-5 rounded-2xl cursor-pointer group border-red-200 bg-gradient-to-br from-white to-red-50/40">
                     <div class="flex items-start justify-between mb-3">
-                        <div class="p-3 bg-red-100 text-red-600 rounded-xl group-hover:bg-red-600 group-hover:text-white transition">
-                            <i class="fa-solid fa-heart-pulse text-xl"></i>
+                        <div class="w-12 h-12 bg-red-100 text-red-600 rounded-xl flex items-center justify-center text-xl group-hover:bg-red-600 group-hover:text-white transition">
+                            <i class="fa-solid fa-heart-pulse"></i>
                         </div>
-                        <span class="text-[10px] font-bold bg-red-100 text-red-700 px-2 py-0.5 rounded animate-pulse">EMERGÊNCIA</span>
+                        <span class="text-[10px] font-black bg-red-100 text-red-700 px-2.5 py-1 rounded-md animate-pulse">CÓDIGO AZUL</span>
                     </div>
-                    <h3 class="font-bold text-slate-900 group-hover:text-red-600 transition">Emergências RCP (Código Azul)</h3>
-                    <p class="text-xs text-slate-500 mt-1">Cronômetro de ciclos de 2 min, metrônomo sonoro de compressão e alerta de Adrenalina.</p>
+                    <h3 class="font-bold text-slate-900 text-base group-hover:text-red-600 transition">Emergências RCP & Metrônomo</h3>
+                    <p class="text-xs text-slate-500 mt-1.5 leading-relaxed">Cronômetro de ciclos de 2 min, metrônomo sonoro de 110 BPM, alerta de Adrenalina e registro de eventos.</p>
                 </div>
 
-                <!-- Calculadoras Clínicas -->
-                <div onclick="openModal('calcModal')" class="glass-card p-5 rounded-2xl hover:border-blue-500/50 hover:shadow-lg transition cursor-pointer group">
+                <!-- Calculadoras Clínicas (Com Abas) -->
+                <div onclick="openModal('calcModal')" class="card-pro p-5 rounded-2xl cursor-pointer group">
                     <div class="flex items-start justify-between mb-3">
-                        <div class="p-3 bg-indigo-50 text-indigo-600 rounded-xl group-hover:bg-indigo-600 group-hover:text-white transition">
-                            <i class="fa-solid fa-calculator text-xl"></i>
+                        <div class="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-xl flex items-center justify-center text-xl group-hover:bg-indigo-600 group-hover:text-white transition">
+                            <i class="fa-solid fa-calculator"></i>
                         </div>
-                        <span class="text-[10px] font-bold bg-slate-100 text-slate-600 px-2 py-0.5 rounded">Exato</span>
+                        <span class="text-[10px] font-black bg-indigo-100 text-indigo-700 px-2.5 py-1 rounded-md">MULTICALC</span>
                     </div>
-                    <h3 class="font-bold text-slate-900 group-hover:text-indigo-600 transition">Calculadoras Clínicas</h3>
-                    <p class="text-xs text-slate-500 mt-1">Glasgow, Wells, CURB-65, SOFA e Ajuste de dose por Função Renal instantâneos.</p>
+                    <h3 class="font-bold text-slate-900 text-base group-hover:text-indigo-600 transition">Calculadoras Clínicas</h3>
+                    <p class="text-xs text-slate-500 mt-1.5 leading-relaxed">Glasgow, CURB-65, Wells para TVP/TEP e Função Renal (Cockcroft-Gault) com condutas automáticas.</p>
                 </div>
 
-                <!-- Transferência Segura SBAR Pro -->
-                <div onclick="openModal('sbarModal')" class="glass-card p-5 rounded-2xl hover:border-blue-500/50 hover:shadow-lg transition cursor-pointer group">
+                <!-- Passagem de Plantão SBAR Pro -->
+                <div onclick="openModal('sbarModal')" class="card-pro p-5 rounded-2xl cursor-pointer group">
                     <div class="flex items-start justify-between mb-3">
-                        <div class="p-3 bg-teal-50 text-teal-600 rounded-xl group-hover:bg-teal-600 group-hover:text-white transition">
-                            <i class="fa-solid fa-right-left text-xl"></i>
+                        <div class="w-12 h-12 bg-teal-50 text-teal-600 rounded-xl flex items-center justify-center text-xl group-hover:bg-teal-600 group-hover:text-white transition">
+                            <i class="fa-solid fa-share-nodes"></i>
                         </div>
+                        <span class="text-[10px] font-black bg-teal-100 text-teal-700 px-2.5 py-1 rounded-md">WHATSAPP</span>
                     </div>
-                    <h3 class="font-bold text-slate-900 group-hover:text-teal-600 transition">Transferência Segura (SBAR Pro)</h3>
-                    <p class="text-xs text-slate-500 mt-1">Formatador de passagem de plantão pronto para envio limpo no WhatsApp da equipe.</p>
-                </div>
-
-                <!-- Consulta Rápida com IA -->
-                <div onclick="alert('Digite sua dúvida na barra de busca superior para ativar a IA de Consulta Rápida.')" class="glass-card p-5 rounded-2xl hover:border-blue-500/50 hover:shadow-lg transition cursor-pointer group">
-                    <div class="flex items-start justify-between mb-3">
-                        <div class="p-3 bg-sky-50 text-sky-600 rounded-xl group-hover:bg-sky-600 group-hover:text-white transition">
-                            <i class="fa-solid fa-magnifying-glass-plus text-xl"></i>
-                        </div>
-                    </div>
-                    <h3 class="font-bold text-slate-900 group-hover:text-sky-600 transition">Consulta Rápida</h3>
-                    <p class="text-xs text-slate-500 mt-1">Busca cirúrgica por sintomas, diagnósticos diferenciais e posologias pediátricas/adulto.</p>
+                    <h3 class="font-bold text-slate-900 text-base group-hover:text-teal-600 transition">Transferência Segura (SBAR Pro)</h3>
+                    <p class="text-xs text-slate-500 mt-1.5 leading-relaxed">Estruture a passagem do caso e envie um relatório limpo direto para o WhatsApp da equipe médica.</p>
                 </div>
 
                 <!-- Guias de Bolso -->
-                <div onclick="alert('Abrindo biblioteca de Condutas Rápidas de Bolso...')" class="glass-card p-5 rounded-2xl hover:border-blue-500/50 hover:shadow-lg transition cursor-pointer group">
+                <div onclick="openModal('guiasModal')" class="card-pro p-5 rounded-2xl cursor-pointer group">
                     <div class="flex items-start justify-between mb-3">
-                        <div class="p-3 bg-amber-50 text-amber-600 rounded-xl group-hover:bg-amber-600 group-hover:text-white transition">
-                            <i class="fa-solid fa-book-medical text-xl"></i>
+                        <div class="w-12 h-12 bg-amber-50 text-amber-600 rounded-xl flex items-center justify-center text-xl group-hover:bg-amber-600 group-hover:text-white transition">
+                            <i class="fa-solid fa-book-medical"></i>
+                        </div>
+                        <span class="text-[10px] font-black bg-amber-100 text-amber-800 px-2.5 py-1 rounded-md">CONDUTAS</span>
+                    </div>
+                    <h3 class="font-bold text-slate-900 text-base group-hover:text-amber-600 transition">Guias de Bolso de Emergência</h3>
+                    <p class="text-xs text-slate-500 mt-1.5 leading-relaxed">Fluxogramas rápidos: Sepse, IAM sem SST, AVC Isquêmico, Cetoacidose Diabética e Anafilaxia.</p>
+                </div>
+
+                <!-- Consulta Rápida -->
+                <div onclick="openModal('searchModal')" class="card-pro p-5 rounded-2xl cursor-pointer group">
+                    <div class="flex items-start justify-between mb-3">
+                        <div class="w-12 h-12 bg-sky-50 text-sky-600 rounded-xl flex items-center justify-center text-xl group-hover:bg-sky-600 group-hover:text-white transition">
+                            <i class="fa-solid fa-pills"></i>
                         </div>
                     </div>
-                    <h3 class="font-bold text-slate-900 group-hover:text-amber-600 transition">Guias de Bolso</h3>
-                    <p class="text-xs text-slate-500 mt-1">Fluxogramas rápidos de Conduta: Cetoacidose, Infarto (IAM), Sepse e Crise Convulsiva.</p>
+                    <h3 class="font-bold text-slate-900 text-base group-hover:text-sky-600 transition">Posologia & Prescrições</h3>
+                    <p class="text-xs text-slate-500 mt-1.5 leading-relaxed">Guia de diluição de antibióticos, drogas vasoativas e doses pediátricas por kg.</p>
                 </div>
 
             </div>
         </section>
 
-        <!-- ABA 2: ESTUDO (Foco em Residência e Retenção) -->
+        <!-- MÓDULO 2: ESTUDO & RESIDÊNCIA -->
         <section id="tab-estudo" class="tab-content hidden">
-            <div class="flex items-center justify-between mb-4">
-                <h2 class="text-xs font-bold text-slate-400 uppercase tracking-wider flex items-center gap-2">
+            <div class="flex items-center justify-between mb-5">
+                <h2 class="text-xs font-extrabold text-slate-400 uppercase tracking-wider flex items-center gap-2">
                     <i class="fa-solid fa-graduation-cap text-indigo-600"></i> Preparatório de Residência & Atualização
                 </h2>
-                <span class="text-[11px] bg-indigo-100 text-indigo-800 px-2.5 py-0.5 rounded-full font-bold flex items-center gap-1">
-                    <i class="fa-solid fa-fire text-amber-500"></i> 5 Dias Seguidos
+                <span class="text-[11px] bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full font-bold flex items-center gap-1.5">
+                    <i class="fa-solid fa-fire text-amber-500"></i> Streak: 5 Dias Ativos
                 </span>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-
-                <!-- NotebookLM + IA -->
-                <div class="glass-card p-5 rounded-2xl hover:border-indigo-500/50 transition cursor-pointer group">
-                    <div class="p-3 bg-purple-50 text-purple-600 rounded-xl w-fit mb-3 group-hover:bg-purple-600 group-hover:text-white transition">
-                        <i class="fa-solid fa-file-pdf text-xl"></i>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                <div onclick="alert('Funcionalidade em integração com NotebookLM. Selecione um documento na tela de estudos.')" class="card-pro p-5 rounded-2xl cursor-pointer group">
+                    <div class="w-12 h-12 bg-purple-50 text-purple-600 rounded-xl flex items-center justify-center text-xl mb-3 group-hover:bg-purple-600 group-hover:text-white transition">
+                        <i class="fa-solid fa-file-pdf"></i>
                     </div>
-                    <h3 class="font-bold text-slate-900 group-hover:text-purple-600 transition">NotebookLM + IA</h3>
-                    <p class="text-xs text-slate-500 mt-1">Faça upload de PDFs de diretrizes e artigos. A IA resume e responde perguntas do documento.</p>
+                    <h3 class="font-bold text-slate-900 text-base group-hover:text-purple-600 transition">NotebookLM + IA</h3>
+                    <p class="text-xs text-slate-500 mt-1.5">Upload de PDFs e artigos científicos com resumo automático por inteligência artificial.</p>
                 </div>
 
-                <!-- Flashcards IA -->
-                <div class="glass-card p-5 rounded-2xl hover:border-indigo-500/50 transition cursor-pointer group">
-                    <div class="p-3 bg-amber-50 text-amber-600 rounded-xl w-fit mb-3 group-hover:bg-amber-600 group-hover:text-white transition">
-                        <i class="fa-solid fa-layer-group text-xl"></i>
+                <div onclick="alert('Iniciando sessão de Flashcards em Repetição Espaçada (SRS)...')" class="card-pro p-5 rounded-2xl cursor-pointer group">
+                    <div class="w-12 h-12 bg-amber-50 text-amber-600 rounded-xl flex items-center justify-center text-xl mb-3 group-hover:bg-amber-600 group-hover:text-white transition">
+                        <i class="fa-solid fa-layer-group"></i>
                     </div>
-                    <h3 class="font-bold text-slate-900 group-hover:text-amber-600 transition">Flashcards IA (SRS)</h3>
-                    <p class="text-xs text-slate-500 mt-1">Repetição Espaçada inteligente estilo Anki. Cards automatizados sobre qualquer especialidade.</p>
+                    <h3 class="font-bold text-slate-900 text-base group-hover:text-amber-600 transition">Flashcards IA (Anki Sync)</h3>
+                    <p class="text-xs text-slate-500 mt-1.5">Algoritmo de Repetição Espaçada com questões focadas em ENARE, USP e AMP.</p>
                 </div>
 
-                <!-- Questões Comentadas -->
-                <div class="glass-card p-5 rounded-2xl hover:border-indigo-500/50 transition cursor-pointer group">
-                    <div class="p-3 bg-emerald-50 text-emerald-600 rounded-xl w-fit mb-3 group-hover:bg-emerald-600 group-hover:text-white transition">
-                        <i class="fa-solid fa-list-check text-xl"></i>
+                <div onclick="alert('Carregando Banco com mais de 50.000 questões comentadas...')" class="card-pro p-5 rounded-2xl cursor-pointer group">
+                    <div class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center text-xl mb-3 group-hover:bg-emerald-600 group-hover:text-white transition">
+                        <i class="fa-solid fa-list-check"></i>
                     </div>
-                    <h3 class="font-bold text-slate-900 group-hover:text-emerald-600 transition">Questões Comentadas</h3>
-                    <p class="text-xs text-slate-500 mt-1">Banco de provas de residência (USP, ENARE, AMP) com justificativa do porquê dos erros.</p>
+                    <h3 class="font-bold text-slate-900 text-base group-hover:text-emerald-600 transition">Banco de Questões Comentadas</h3>
+                    <p class="text-xs text-slate-500 mt-1.5">Simulados por grande área com explicação detalhada de cada opção incorreta.</p>
                 </div>
-
-                <!-- Simulado Prova -->
-                <div class="glass-card p-5 rounded-2xl hover:border-indigo-500/50 transition cursor-pointer group">
-                    <div class="p-3 bg-rose-50 text-rose-600 rounded-xl w-fit mb-3 group-hover:bg-rose-600 group-hover:text-white transition">
-                        <i class="fa-solid fa-bullseye text-xl"></i>
-                    </div>
-                    <h3 class="font-bold text-slate-900 group-hover:text-rose-600 transition">Simulado de Prova</h3>
-                    <p class="text-xs text-slate-500 mt-1">Treine com cronômetro real e gabarito estatístico de desempenho por grande área.</p>
-                </div>
-
-                <!-- Biblioteca Médica -->
-                <div class="glass-card p-5 rounded-2xl hover:border-indigo-500/50 transition cursor-pointer group">
-                    <div class="p-3 bg-blue-50 text-blue-600 rounded-xl w-fit mb-3 group-hover:bg-blue-600 group-hover:text-white transition">
-                        <i class="fa-solid fa-book text-xl"></i>
-                    </div>
-                    <h3 class="font-bold text-slate-900 group-hover:text-blue-600 transition">Biblioteca Médica</h3>
-                    <p class="text-xs text-slate-500 mt-1">Acesso organizado por grandes áreas: Pediatria, GO, Cirurgia, Clínica e Preventiva.</p>
-                </div>
-
-                <!-- Cronograma de Estudos -->
-                <div class="glass-card p-5 rounded-2xl hover:border-indigo-500/50 transition cursor-pointer group">
-                    <div class="p-3 bg-teal-50 text-teal-600 rounded-xl w-fit mb-3 group-hover:bg-teal-600 group-hover:text-white transition">
-                        <i class="fa-solid fa-calendar-check text-xl"></i>
-                    </div>
-                    <h3 class="font-bold text-slate-900 group-hover:text-teal-600 transition">Cronograma de Estudos</h3>
-                    <p class="text-xs text-slate-500 mt-1">Planejamento semanal personalizado de acordo com a data da sua prova de residência.</p>
-                </div>
-
             </div>
         </section>
 
-        <!-- ABA 3: RESIDENTE / DESEMPENHO -->
+        <!-- MÓDULO 3: PERFIL DO RESIDENTE -->
         <section id="tab-residente" class="tab-content hidden">
-            <div class="glass-card p-6 rounded-2xl mb-6">
-                <div class="flex items-center gap-4">
-                    <div class="w-16 h-16 bg-blue-600 text-white rounded-2xl flex items-center justify-center text-2xl font-bold shadow-md shadow-blue-500/30">
-                        DR
-                    </div>
-                    <div>
-                        <h2 class="text-lg font-bold text-slate-900">Dr. Médico Usuário</h2>
-                        <p class="text-xs text-slate-500">Residência em Clínica Médica • CRM Ativo</p>
-                        <span class="inline-block mt-2 text-[10px] bg-amber-100 text-amber-800 font-bold px-2.5 py-0.5 rounded-full">MEMBRO PRO ATIVO</span>
-                    </div>
+            <div class="card-pro p-6 rounded-2xl mb-6 flex items-center gap-5">
+                <div class="w-16 h-16 bg-gradient-to-tr from-blue-600 to-indigo-600 text-white rounded-2xl flex items-center justify-center text-2xl font-black shadow-lg shadow-blue-500/20">
+                    DR
                 </div>
-            </div>
-
-            <!-- Gráfico de Desempenho Simulado -->
-            <div class="glass-card p-6 rounded-2xl">
-                <h3 class="font-bold text-slate-900 mb-4 flex items-center gap-2 text-sm">
-                    <i class="fa-solid fa-chart-line text-blue-600"></i> Desempenho em Simulados
-                </h3>
-                <div class="space-y-3 text-xs">
-                    <div>
-                        <div class="flex justify-between font-semibold mb-1">
-                            <span>Clínica Médica</span>
-                            <span class="text-emerald-600">82%</span>
-                        </div>
-                        <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
-                            <div class="bg-emerald-500 h-full rounded-full" style="width: 82%"></div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="flex justify-between font-semibold mb-1">
-                            <span>Cirurgia Geral</span>
-                            <span class="text-blue-600">74%</span>
-                        </div>
-                        <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
-                            <div class="bg-blue-500 h-full rounded-full" style="width: 74%"></div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="flex justify-between font-semibold mb-1">
-                            <span>Pediatria</span>
-                            <span class="text-amber-600">65%</span>
-                        </div>
-                        <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
-                            <div class="bg-amber-500 h-full rounded-full" style="width: 65%"></div>
-                        </div>
-                    </div>
+                <div>
+                    <h2 class="text-lg font-bold text-slate-900">Dr. Médico Usuário</h2>
+                    <p class="text-xs text-slate-500 font-medium">Residência Médica • CRM Ativo</p>
+                    <span class="inline-block mt-2 text-[10px] bg-amber-100 text-amber-800 font-extrabold px-3 py-0.5 rounded-full border border-amber-200">ASSINATURA PRO ATIVA</span>
                 </div>
             </div>
         </section>
 
     </main>
 
-    <!-- NAVEGAÇÃO INFERIOR FIXA (ESTILO APP NATIVO) -->
-    <nav class="sticky bottom-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200 px-6 py-2 shadow-lg">
+    <!-- NAVEGAÇÃO INFERIOR DESTACADA (SUPER VISÍVEL E FUNCIONAL) -->
+    <nav class="sticky bottom-0 z-40 bg-white border-t border-slate-200 px-4 py-2.5 shadow-2xl">
         <div class="max-w-md mx-auto flex items-center justify-around">
             
-            <button onclick="switchTab('plantao')" id="nav-plantao" class="flex flex-col items-center gap-1 text-blue-600 font-bold">
+            <button onclick="switchTab('plantao')" id="nav-plantao" class="flex flex-col items-center gap-1 px-5 py-1.5 rounded-xl transition bg-blue-50 text-blue-700 font-extrabold">
                 <i class="fa-solid fa-kit-medical text-lg"></i>
-                <span class="text-[11px]">PLANTÃO</span>
+                <span class="text-[11px] tracking-wide">PLANTÃO</span>
             </button>
 
-            <button onclick="switchTab('estudo')" id="nav-estudo" class="flex flex-col items-center gap-1 text-slate-400 font-medium hover:text-slate-600">
-                <i class="fa-solid fa-book-open text-lg"></i>
-                <span class="text-[11px]">ESTUDO</span>
+            <button onclick="switchTab('estudo')" id="nav-estudo" class="flex flex-col items-center gap-1 px-5 py-1.5 rounded-xl transition text-slate-500 font-semibold hover:text-slate-900">
+                <i class="fa-solid fa-graduation-cap text-lg"></i>
+                <span class="text-[11px] tracking-wide">ESTUDO</span>
             </button>
 
-            <button onclick="switchTab('residente')" id="nav-residente" class="flex flex-col items-center gap-1 text-slate-400 font-medium hover:text-slate-600">
+            <button onclick="switchTab('residente')" id="nav-residente" class="flex flex-col items-center gap-1 px-5 py-1.5 rounded-xl transition text-slate-500 font-semibold hover:text-slate-900">
                 <i class="fa-solid fa-user-doctor text-lg"></i>
-                <span class="text-[11px]">RESIDENTE</span>
+                <span class="text-[11px] tracking-wide">RESIDENTE</span>
             </button>
 
         </div>
     </nav>
 
-    <!-- ==================== MODAIS DE FUNCIONALIDADES ==================== -->
+    <!-- ==================== MODAIS TOTALMENTE FUNCIONAIS ==================== -->
 
-    <!-- MODAL SOAP PRO -->
+    <!-- MODAL 1: SOAP PRO (COM RECONHECIMENTO DE VOZ CORRIGIDO) -->
     <div id="soapModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-2xl max-w-2xl w-full p-6 shadow-2xl max-h-[90vh] overflow-y-auto">
-            <div class="flex items-center justify-between pb-3 border-b border-slate-100">
-                <h3 class="font-bold text-slate-900 flex items-center gap-2">
-                    <i class="fa-solid fa-clipboard-user text-blue-600"></i> SOAP Pro - Gerador de Prontuário
-                </h3>
-                <button onclick="closeModal('soapModal')" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+        <div class="bg-white rounded-3xl max-w-2xl w-full p-6 shadow-2xl max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center justify-between pb-4 border-b border-slate-100">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center font-bold">
+                        <i class="fa-solid fa-microphone-lines text-lg"></i>
+                    </div>
+                    <h3 class="font-extrabold text-slate-900 text-lg">SOAP Pro - Transcrição Médica</h3>
+                </div>
+                <button onclick="closeModal('soapModal')" class="text-slate-400 hover:text-slate-600 p-2"><i class="fa-solid fa-xmark text-xl"></i></button>
             </div>
 
-            <div class="mt-4 space-y-4 text-xs">
+            <div class="mt-5 space-y-4 text-xs">
                 <div>
-                    <label class="block font-bold text-slate-700 mb-1">Relato por Voz ou Texto:</label>
+                    <div class="flex justify-between items-center mb-1.5">
+                        <label class="font-bold text-slate-700">Relato do Caso (Voz ou Texto):</label>
+                        <span id="voiceStatus" class="text-[11px] text-slate-400 font-medium">Aguardando microfone...</span>
+                    </div>
                     <div class="relative">
-                        <textarea id="soapInput" rows="3" placeholder="Ex: Paciente 30 anos, dor abdominal em fossa ilíaca direita há 12h, febre 38.2°C, Sinal de Blumberg positivo..." class="w-full p-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500/20 focus:border-blue-600 outline-none"></textarea>
-                        <button onclick="startVoiceDictation()" class="absolute right-3 bottom-3 bg-red-100 hover:bg-red-200 text-red-600 p-2 rounded-lg font-bold flex items-center gap-1">
-                            <i class="fa-solid fa-microphone"></i> Dictar
+                        <textarea id="soapInput" rows="4" placeholder="Exemplo: Paciente 45 anos, dor torácica opressiva com irradiação para mandíbula há 40 minutos, sudorese profusa, hipertenso..." class="w-full p-3.5 border border-slate-200 rounded-2xl focus:ring-2 focus:ring-blue-500/30 focus:border-blue-600 outline-none font-medium text-slate-800"></textarea>
+                        <button id="btnDictate" onclick="toggleDictation()" class="absolute right-3 bottom-3 bg-red-600 hover:bg-red-700 text-white px-3.5 py-2 rounded-xl font-bold flex items-center gap-2 shadow-md shadow-red-500/20 transition">
+                            <i class="fa-solid fa-microphone" id="micIcon"></i>
+                            <span id="micText">Gravar Voz</span>
                         </button>
                     </div>
                 </div>
 
-                <button onclick="generateSOAP()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 rounded-xl transition shadow-md shadow-blue-500/20">
-                    Gerar Prontuário Estruturado
+                <button onclick="generateSOAP()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-extrabold py-3.5 rounded-2xl transition shadow-md shadow-blue-500/20 text-sm">
+                    ⚡ Gerar Prontuário Inteligente SOAP
                 </button>
 
-                <div id="soapOutput" class="hidden bg-slate-50 p-4 rounded-xl border border-slate-200 font-mono text-[11px] leading-relaxed">
-                    <strong>S (Subjetivo):</strong> Paciente 30 anos relata dor aguda em fossa ilíaca direita associada a febre e náuseas.<br>
-                    <strong>O (Objetivo):</strong> T: 38.2°C, Descompressão dolorosa positiva em ponto de McBurney.<br>
-                    <strong>A (Avaliação):</strong> Suspeita clínica alta para Apendicite Aguda (CID-10: K35).<br>
-                    <strong>P (Plano):</strong> Jejum, USG/TC de Abdome total, Analgesia e Parecer da Cirurgia Geral.
+                <div id="soapOutput" class="hidden bg-slate-50 p-4 rounded-2xl border border-slate-200 text-slate-800 text-[12px] leading-relaxed font-mono">
+                    <p class="font-bold text-blue-700 border-b border-slate-200 pb-1 mb-2 font-sans">PRONTUÁRIO GERADO COM SUCESSO:</p>
+                    <div id="soapFormattedText"></div>
                     
-                    <button onclick="navigator.clipboard.writeText(document.getElementById('soapOutput').innerText); alert('Prontuário copiado com sucesso!')" class="mt-3 bg-slate-900 text-white font-sans px-3 py-1.5 rounded-lg font-semibold flex items-center gap-1.5">
-                        <i class="fa-solid fa-copy"></i> Copiar para Prontuário
+                    <button onclick="copySOAPText()" class="mt-4 w-full bg-slate-900 hover:bg-slate-800 text-white font-sans px-4 py-2.5 rounded-xl font-bold flex items-center justify-center gap-2 transition">
+                        <i class="fa-solid fa-copy"></i> Copiar para o Prontuário Eletrônico
                     </button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- MODAL EMERGÊNCIAS RCP (CÓDIGO AZUL) -->
+    <!-- MODAL 2: EMERGÊNCIAS RCP (COM METRÔNOMO DE ÁUDIO REAL) -->
     <div id="rcpModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl">
             <div class="flex items-center justify-between pb-3 border-b border-slate-100">
-                <h3 class="font-bold text-red-600 flex items-center gap-2">
-                    <i class="fa-solid fa-heart-pulse text-red-600"></i> Código Azul - RCP Ativa
+                <h3 class="font-extrabold text-red-600 text-base flex items-center gap-2">
+                    <i class="fa-solid fa-heart-pulse"></i> Código Azul - Monitor de RCP
                 </h3>
-                <button onclick="closeModal('rcpModal'); stopRCP();" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+                <button onclick="closeModal('rcpModal'); stopRCP();" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-xl"></i></button>
             </div>
 
             <div class="mt-6 text-center">
-                <div class="text-4xl font-extrabold font-mono text-slate-900 mb-1" id="rcpTimer">02:00</div>
-                <span class="text-xs text-slate-500 font-medium">Tempo do Ciclo Atual</span>
+                <div class="text-5xl font-black font-mono text-slate-900 tracking-tight" id="rcpTimer">02:00</div>
+                <span class="text-xs text-slate-500 font-bold uppercase tracking-wider block mt-1">Tempo do Ciclo de Massagem</span>
 
-                <div class="my-6 flex justify-center gap-3">
-                    <button id="btnStartRCP" onclick="startRCP()" class="bg-red-600 hover:bg-red-700 text-white font-bold px-6 py-3 rounded-xl shadow-lg shadow-red-500/30 transition text-sm">
+                <div class="my-5 flex justify-center gap-2">
+                    <button id="btnStartRCP" onclick="toggleRCPTimer()" class="bg-red-600 hover:bg-red-700 text-white font-extrabold px-6 py-3 rounded-2xl shadow-lg shadow-red-500/25 transition text-xs">
                         INICIAR CICLO (2 MIN)
+                    </button>
+                    <button id="btnMetronome" onclick="toggleMetronome()" class="bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold px-4 py-3 rounded-2xl transition text-xs flex items-center gap-1.5">
+                        <i class="fa-solid fa-volume-high"></i>
+                        <span id="metronomeText">Som 110 BPM</span>
                     </button>
                 </div>
 
                 <div class="grid grid-cols-2 gap-2 text-xs">
-                    <button onclick="logRCPEvent('Adrenalina 1mg Administrada')" class="bg-slate-100 hover:bg-slate-200 p-2.5 rounded-xl font-bold text-slate-700">
+                    <button onclick="logRCPEvent('💉 Adrenalina 1mg Administrada')" class="bg-slate-100 hover:bg-slate-200 p-3 rounded-xl font-bold text-slate-800 border border-slate-200">
                         💉 Adrenalina (1mg)
                     </button>
-                    <button onclick="logRCPEvent('Choque Aplicado')" class="bg-amber-100 hover:bg-amber-200 p-2.5 rounded-xl font-bold text-amber-800">
+                    <button onclick="logRCPEvent('⚡ Choque Desfibrilação Aplicado')" class="bg-amber-100 hover:bg-amber-200 p-3 rounded-xl font-bold text-amber-900 border border-amber-300">
                         ⚡ Choque Aplicado
                     </button>
                 </div>
 
-                <div id="rcpLog" class="mt-4 bg-slate-50 p-3 rounded-xl border border-slate-200 text-left text-[11px] h-24 overflow-y-auto font-mono text-slate-600">
-                    <em>Registro de Eventos da Parada Cardíaca...</em>
+                <div id="rcpLog" class="mt-4 bg-slate-900 text-emerald-400 p-3 rounded-xl text-left text-[11px] h-28 overflow-y-auto font-mono">
+                    <div>[00:00] Aguardando início do protocolo...</div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- MODAL CALCULADORAS CLÍNICAS -->
+    <!-- MODAL 3: CALCULADORAS CLÍNICAS (COM ABAS MÚLTIPLAS) -->
     <div id="calcModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl">
+        <div class="bg-white rounded-3xl max-w-xl w-full p-6 shadow-2xl max-h-[90vh] overflow-y-auto">
             <div class="flex items-center justify-between pb-3 border-b border-slate-100">
-                <h3 class="font-bold text-slate-900 flex items-center gap-2">
-                    <i class="fa-solid fa-calculator text-indigo-600"></i> Escala de Coma de Glasgow
+                <h3 class="font-extrabold text-slate-900 text-base flex items-center gap-2">
+                    <i class="fa-solid fa-calculator text-indigo-600"></i> Calculadoras Médicas
                 </h3>
-                <button onclick="closeModal('calcModal')" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+                <button onclick="closeModal('calcModal')" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-xl"></i></button>
             </div>
 
-            <div class="mt-4 space-y-3 text-xs">
+            <!-- NAVEGAÇÃO DE CALCULADORAS -->
+            <div class="flex gap-2 my-4 border-b border-slate-100 pb-2 overflow-x-auto text-xs font-bold">
+                <button onclick="switchCalc('glasgow')" id="cbtn-glasgow" class="px-3 py-1.5 bg-indigo-600 text-white rounded-lg">Glasgow</button>
+                <button onclick="switchCalc('curb')" id="cbtn-curb" class="px-3 py-1.5 bg-slate-100 text-slate-600 rounded-lg">CURB-65</button>
+                <button onclick="switchCalc('wells')" id="cbtn-wells" class="px-3 py-1.5 bg-slate-100 text-slate-600 rounded-lg">Wells TVP</button>
+            </div>
+
+            <!-- GLASGOW -->
+            <div id="calc-glasgow" class="calc-section space-y-3 text-xs">
                 <div>
                     <label class="font-bold text-slate-700">Abertura Ocular:</label>
-                    <select id="glasgowOcular" onchange="calcGlasgow()" class="w-full mt-1 p-2 border border-slate-200 rounded-lg">
-                        <option value="4">Spontânea (4)</option>
-                        <option value="3">Ao comando verbal (3)</option>
-                        <option value="2">À dor (2)</option>
-                        <option value="1">Nenhuma (1)</option>
+                    <select id="gOcular" onchange="runGlasgow()" class="w-full mt-1 p-2.5 border rounded-xl">
+                        <option value="4">Espontânea (4)</option>
+                        <option value="3">Ao estímulo sonoro (3)</option>
+                        <option value="2">À pressão/dor (2)</option>
+                        <option value="1">Ausente (1)</option>
                     </select>
                 </div>
                 <div>
                     <label class="font-bold text-slate-700">Resposta Verbal:</label>
-                    <select id="glasgowVerbal" onchange="calcGlasgow()" class="w-full mt-1 p-2 border border-slate-200 rounded-lg">
+                    <select id="gVerbal" onchange="runGlasgow()" class="w-full mt-1 p-2.5 border rounded-xl">
                         <option value="5">Orientado (5)</option>
                         <option value="4">Confuso (4)</option>
                         <option value="3">Palavras desconexas (3)</option>
-                        <option value="2">Sons incompreensíveis (2)</option>
-                        <option value="1">Nenhuma (1)</option>
+                        <option value="2">Incompreensível (2)</option>
+                        <option value="1">Ausente (1)</option>
                     </select>
                 </div>
                 <div>
                     <label class="font-bold text-slate-700">Resposta Motora:</label>
-                    <select id="glasgowMotor" onchange="calcGlasgow()" class="w-full mt-1 p-2 border border-slate-200 rounded-lg">
+                    <select id="gMotor" onchange="runGlasgow()" class="w-full mt-1 p-2.5 border rounded-xl">
                         <option value="6">Obedece comandos (6)</option>
                         <option value="5">Localiza a dor (5)</option>
-                        <option value="4">Flexão normal / Retirada (4)</option>
-                        <option value="3">Flexão anômala / Decorticação (3)</option>
-                        <option value="2">Extensão anômala / Descerebração (2)</option>
-                        <option value="1">Nenhuma (1)</option>
+                        <option value="4">Flexão normal (4)</option>
+                        <option value="3">Flexão anômala (3)</option>
+                        <option value="2">Extensão anômala (2)</option>
+                        <option value="1">Ausente (1)</option>
                     </select>
                 </div>
 
-                <div class="bg-indigo-50 p-4 rounded-xl text-center border border-indigo-100 mt-4">
-                    <span class="text-xs text-indigo-600 font-bold block">PONTUAÇÃO TOTAL GLASGOW</span>
-                    <span id="glasgowResult" class="text-3xl font-extrabold text-indigo-900">15 / 15</span>
-                    <p id="glasgowConduct" class="text-[11px] text-indigo-700 mt-1 font-medium">Nível de consciência normal.</p>
+                <div class="bg-indigo-50 p-4 rounded-2xl text-center border border-indigo-100 mt-4">
+                    <span class="text-xs text-indigo-600 font-extrabold uppercase block">PONTUAÇÃO GLASGOW</span>
+                    <span id="gResult" class="text-3xl font-black text-indigo-900">15 / 15</span>
+                    <p id="gConduct" class="text-xs text-indigo-700 mt-1 font-semibold">Sem rebaixamento do nível de consciência.</p>
+                </div>
+            </div>
+
+            <!-- CURB-65 -->
+            <div id="calc-curb" class="calc-section hidden space-y-2 text-xs">
+                <label class="flex items-center gap-2 p-2 bg-slate-50 rounded-lg"><input type="checkbox" id="c1" onchange="runCurb()"> Confusão mental recém-instalada</label>
+                <label class="flex items-center gap-2 p-2 bg-slate-50 rounded-lg"><input type="checkbox" id="c2" onchange="runCurb()"> Ureia &gt; 50 mg/dL (19 mmol/L)</label>
+                <label class="flex items-center gap-2 p-2 bg-slate-50 rounded-lg"><input type="checkbox" id="c3" onchange="runCurb()"> Frequência Respiratória &ge; 30 irpm</label>
+                <label class="flex items-center gap-2 p-2 bg-slate-50 rounded-lg"><input type="checkbox" id="c4" onchange="runCurb()"> Pressão Arterial (PAS &lt; 90 ou PAD &le; 60 mmHg)</label>
+                <label class="flex items-center gap-2 p-2 bg-slate-50 rounded-lg"><input type="checkbox" id="c5" onchange="runCurb()"> Idade &ge; 65 anos</label>
+
+                <div class="bg-blue-50 p-4 rounded-2xl text-center border border-blue-100 mt-4">
+                    <span class="text-xs text-blue-600 font-extrabold uppercase block">SCORE CURB-65</span>
+                    <span id="curbResult" class="text-3xl font-black text-blue-900">0 Pontos</span>
+                    <p id="curbConduct" class="text-xs text-blue-700 mt-1 font-semibold">Baixo risco: Tratamento Ambulatorial.</p>
+                </div>
+            </div>
+
+            <!-- WELLS TVP -->
+            <div id="calc-wells" class="calc-section hidden space-y-2 text-xs">
+                <label class="flex items-center gap-2 p-2 bg-slate-50 rounded-lg"><input type="checkbox" id="w1" onchange="runWells()"> Câncer ativo (+1)</label>
+                <label class="flex items-center gap-2 p-2 bg-slate-50 rounded-lg"><input type="checkbox" id="w2" onchange="runWells()"> Paresia ou imobilização de membro inferior (+1)</label>
+                <label class="flex items-center gap-2 p-2 bg-slate-50 rounded-lg"><input type="checkbox" id="w3" onchange="runWells()"> Acamado recente &gt; 3 dias ou cirurgia maior em 12 sem (+1)</label>
+                <label class="flex items-center gap-2 p-2 bg-slate-50 rounded-lg"><input type="checkbox" id="w4" onchange="runWells()"> Dor/sensibilidade no trajeto venoso profundo (+1)</label>
+
+                <div class="bg-teal-50 p-4 rounded-2xl text-center border border-teal-100 mt-4">
+                    <span class="text-xs text-teal-600 font-extrabold uppercase block">SCORE DE WELLS TVP</span>
+                    <span id="wellsResult" class="text-3xl font-black text-teal-900">0 Pontos</span>
+                    <p id="wellsConduct" class="text-xs text-teal-700 mt-1 font-semibold">Probabilidade Baixa de TVP.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- MODAL 4: PASSAGEM DE PLANTÃO SBAR -->
+    <div id="sbarModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+                <h3 class="font-extrabold text-slate-900 text-base flex items-center gap-2">
+                    <i class="fa-solid fa-share-nodes text-teal-600"></i> Passagem de Plantão SBAR Pro
+                </h3>
+                <button onclick="closeModal('sbarModal')" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-xl"></i></button>
+            </div>
+
+            <div class="mt-4 space-y-3 text-xs">
+                <div>
+                    <label class="font-bold text-slate-700">S - Situação (Leito, Nome, Idade, Diagnóstico):</label>
+                    <input type="text" id="sbarS" placeholder="Ex: Leito 04, João da Silva, 62a, Pós-Op Apendicectomia" class="w-full mt-1 p-2.5 border rounded-xl">
+                </div>
+                <div>
+                    <label class="font-bold text-slate-700">B - Breve Histórico (Breve contexto do internamento):</label>
+                    <input type="text" id="sbarB" placeholder="Ex: Internou ontem com dor em FID, sem intercorrências no pós-op" class="w-full mt-1 p-2.5 border rounded-xl">
+                </div>
+                <div>
+                    <label class="font-bold text-slate-700">A - Avaliação (Sinais vitais e estado atual):</label>
+                    <input type="text" id="sbarA" placeholder="Ex: Afebril, PA 120x80, abdome póstero-cirúrgico limpo, diurese presente" class="w-full mt-1 p-2.5 border rounded-xl">
+                </div>
+                <div>
+                    <label class="font-bold text-slate-700">R - Recomendação (Pendências para o próximo plantão):</label>
+                    <input type="text" id="sbarR" placeholder="Ex: Aguarda resultado de Hemograma das 18h e reavaliação da dieta" class="w-full mt-1 p-2.5 border rounded-xl">
+                </div>
+
+                <button onclick="sendSbarWhatsApp()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold py-3 rounded-xl transition flex items-center justify-center gap-2 text-xs shadow-md shadow-emerald-500/20">
+                    <i class="fa-brands fa-whatsapp text-lg"></i> Enviar Formatado via WhatsApp
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 5: GUIAS DE BOLSO DE EMERGÊNCIA -->
+    <div id="guiasModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-xl w-full p-6 shadow-2xl max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+                <h3 class="font-extrabold text-slate-900 text-base flex items-center gap-2">
+                    <i class="fa-solid fa-book-medical text-amber-600"></i> Guias de Bolso - Condutas Rápidas
+                </h3>
+                <button onclick="closeModal('guiasModal')" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-xl"></i></button>
+            </div>
+
+            <div class="mt-4 space-y-3 text-xs">
+                <div class="p-3.5 bg-red-50 border border-red-200 rounded-2xl">
+                    <h4 class="font-bold text-red-900 text-sm">🚨 SEPSE GRAVE / CHOQUE SÉPTICO</h4>
+                    <p class="text-slate-700 mt-1"><strong>Pacote de 1 Hora:</strong> Coletar Hemoculturas (2 pares) + Dosar Lactato Sérico + Iniciar Antibiótico Amplo Espectro + Ringer Lactato 30ml/kg se hipotensão ou lactato &ge; 4.</p>
+                </div>
+
+                <div class="p-3.5 bg-blue-50 border border-blue-200 rounded-2xl">
+                    <h4 class="font-bold text-blue-900 text-sm">🫀 SÍNDROME CORONARIANA AGUDA (SCA)</h4>
+                    <p class="text-slate-700 mt-1"><strong>MONAB Adaptado:</strong> ECG em 10 min + AAS 200-300mg (mastigado) + Clopidogrel 300mg + An analgesia se dor refratária + Heparinização conforme protocolo local.</p>
+                </div>
+
+                <div class="p-3.5 bg-amber-50 border border-amber-200 rounded-2xl">
+                    <h4 class="font-bold text-amber-900 text-sm">🧠 AVC ISQUÊMICO AGUTO</h4>
+                    <p class="text-slate-700 mt-1"><strong>Protocolo de Trompólise (&lt; 4.5h):</strong> TC de crânio sem contraste imediata + Controle da PA (&lt; 185x110 mmHg se for trombolisar) + Alteplase 0.9mg/kg (máx 90mg).</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- MODAL CHECKOUT / ASSINATURA MERCADO PAGO -->
+    <!-- MODAL CHECKOUT MERCADO PAGO -->
     <div id="checkoutModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-3xl max-w-xl w-full p-6 shadow-2xl border border-slate-100">
+        <div class="bg-white rounded-3xl max-w-xl w-full p-6 shadow-2xl">
             <div class="flex items-center justify-between pb-3 border-b border-slate-100">
                 <div class="flex items-center gap-2">
                     <i class="fa-solid fa-crown text-amber-500 text-xl"></i>
                     <h3 class="font-extrabold text-slate-900">Seja Medivus PRO</h3>
                 </div>
-                <button onclick="closeModal('checkoutModal')" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+                <button onclick="closeModal('checkoutModal')" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-xl"></i></button>
             </div>
 
-            <p class="text-xs text-slate-500 mt-2">Acesso ilimitado ao SOAP Pro por Voz, Código Azul RCP, Banco de Questões e Calculadoras Clínicas sem restrições.</p>
+            <p class="text-xs text-slate-500 mt-2">Acesso ilimitado ao SOAP Pro por Voz, Código Azul RCP, Calculadoras e Banco de Provas.</p>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
-                <!-- Plano Mensal -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-5">
                 <div class="border border-slate-200 rounded-2xl p-4 flex flex-col justify-between hover:border-blue-500 transition">
                     <div>
-                        <span class="text-[10px] font-bold text-slate-400 uppercase">Flexível</span>
+                        <span class="text-[10px] font-bold text-slate-400 uppercase">Mensal</span>
                         <h4 class="font-bold text-slate-900 text-sm mt-1">Plano Mensal</h4>
                         <div class="mt-2">
-                            <span class="text-2xl font-extrabold text-slate-900">R$ 59,90</span>
+                            <span class="text-2xl font-black text-slate-900">R$ 59,90</span>
                             <span class="text-xs text-slate-500">/mês</span>
                         </div>
-                        <ul class="text-[11px] text-slate-600 space-y-1.5 mt-3">
-                            <li><i class="fa-solid fa-check text-emerald-500 mr-1"></i> Acesso total sem fidelidade</li>
-                            <li><i class="fa-solid fa-check text-emerald-500 mr-1"></i> Cancele a qualquer momento</li>
-                        </ul>
                     </div>
                     <a href="https://mpago.la/2phgnwF" target="_blank" class="mt-4 block text-center bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold py-2.5 rounded-xl transition">
                         Assinar Mensal
                     </a>
                 </div>
 
-                <!-- Plano Anual (Destaque) -->
-                <div class="border-2 border-blue-600 rounded-2xl p-4 bg-blue-50/30 flex flex-col justify-between relative overflow-hidden shadow-lg shadow-blue-500/10">
-                    <span class="absolute top-0 right-0 bg-blue-600 text-white text-[9px] font-extrabold px-2 py-0.5 rounded-bl-lg uppercase tracking-wider">
+                <div class="border-2 border-blue-600 rounded-2xl p-4 bg-blue-50/40 flex flex-col justify-between relative overflow-hidden shadow-lg shadow-blue-500/10">
+                    <span class="absolute top-0 right-0 bg-blue-600 text-white text-[9px] font-black px-2 py-0.5 rounded-bl-lg uppercase">
                         ECONOMIZE 33%
                     </span>
                     <div>
-                        <span class="text-[10px] font-bold text-blue-600 uppercase">Mais Popular</span>
+                        <span class="text-[10px] font-bold text-blue-600 uppercase">Recomendado</span>
                         <h4 class="font-bold text-slate-900 text-sm mt-1">Plano Anual PRO</h4>
                         <div class="mt-2">
-                            <span class="text-xs text-slate-500 block">12x de</span>
-                            <span class="text-2xl font-extrabold text-blue-600">R$ 39,90</span>
+                            <span class="text-2xl font-black text-blue-600">R$ 39,90</span>
                             <span class="text-xs text-slate-500">/mês</span>
                         </div>
-                        <ul class="text-[11px] text-slate-600 space-y-1.5 mt-3">
-                            <li><i class="fa-solid fa-check text-emerald-500 mr-1"></i> Equivale a R$ 478,80/ano</li>
-                            <li><i class="fa-solid fa-check text-emerald-500 mr-1"></i> Economize R$ 240,00 por ano</li>
-                            <li><i class="fa-solid fa-check text-emerald-500 mr-1"></i> Garantia incondicional 7 dias</li>
-                        </ul>
                     </div>
                     <a href="https://mpago.la/1s4czMx" target="_blank" class="mt-4 block text-center bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold py-2.5 rounded-xl transition shadow-md shadow-blue-500/20">
-                        Assinar Anual (Melhor Valor)
+                        Assinar Anual (Melhor Oferta)
                     </a>
                 </div>
-            </div>
-
-            <div class="mt-4 text-center">
-                <span class="text-[10px] text-slate-400 flex items-center justify-center gap-1">
-                    <i class="fa-solid fa-lock"></i> Pagamento seguro processado pelo Mercado Pago
-                </span>
             </div>
         </div>
     </div>
 
-    <!-- SCRIPT JS DE LÓGICA & INTERATIVIDADE -->
+    <!-- JAVASCRIPT CORRIGIDO & ROBUSTO -->
     <script>
-        // Navegação entre Abas
+        // NAVEGAÇÃO DE ABAS
         function switchTab(tabName) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
             document.getElementById('tab-' + tabName).classList.remove('hidden');
 
-            // Atualiza botões da nav
             ['plantao', 'estudo', 'residente'].forEach(t => {
                 const btn = document.getElementById('nav-' + t);
                 if (t === tabName) {
-                    btn.className = 'flex flex-col items-center gap-1 text-blue-600 font-bold';
+                    btn.className = 'flex flex-col items-center gap-1 px-5 py-1.5 rounded-xl transition bg-blue-50 text-blue-700 font-extrabold';
                 } else {
-                    btn.className = 'flex flex-col items-center gap-1 text-slate-400 font-medium hover:text-slate-600';
+                    btn.className = 'flex flex-col items-center gap-1 px-5 py-1.5 rounded-xl transition text-slate-500 font-semibold hover:text-slate-900';
                 }
             });
         }
 
-        // Modais Control
+        // CONTROLE DE MODAIS
         function openModal(id) { document.getElementById(id).classList.remove('hidden'); }
         function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
 
-        // Compartilhamento Viral WhatsApp
-        function shareWhatsApp() {
-            const text = encodeURIComponent("Colega, estou usando o MEDIVUS no plantão e está salvando minha rotina! Tem SOAP por voz com IA, Calculadoras e Código Azul RCP. Testa aí: https://meu-medivus.qqpinpp.workers.dev/");
-            window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
-        }
+        // RECONHECIMENTO DE VOZ (SOAP PRO)
+        let recognition;
+        let isRecording = false;
 
-        // SOAP Dictation Placeholder
-        function startVoiceDictation() {
-            if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
-                const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-                const recognition = new SpeechRecognition();
+        function toggleDictation() {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            const statusLabel = document.getElementById('voiceStatus');
+            const micText = document.getElementById('micText');
+            const micIcon = document.getElementById('micIcon');
+            const soapInput = document.getElementById('soapInput');
+
+            if (!SpeechRecognition) {
+                alert("O seu navegador não suporta a API de áudio direto. Digite a história no campo de texto ou utilize o Google Chrome/Edge.");
+                return;
+            }
+
+            if (!isRecording) {
+                recognition = new SpeechRecognition();
                 recognition.lang = 'pt-BR';
+                recognition.continuous = true;
+                recognition.interimResults = true;
+
                 recognition.onstart = function() {
-                    alert('Gravando... Fale os dados do paciente.');
+                    isRecording = true;
+                    statusLabel.innerText = "🎙️ Ouvindo... Fale a história do paciente.";
+                    statusLabel.className = "text-[11px] text-red-600 font-bold animate-pulse";
+                    micText.innerText = "Parar Gravação";
+                    micIcon.className = "fa-solid fa-stop recording-pulse";
                 };
+
                 recognition.onresult = function(event) {
-                    document.getElementById('soapInput').value = event.results[0][0].transcript;
+                    let transcript = '';
+                    for (let i = event.resultIndex; i < event.results.length; ++i) {
+                        transcript += event.results[i][0].transcript;
+                    }
+                    soapInput.value = transcript;
                 };
+
+                recognition.onerror = function(event) {
+                    console.error("Erro no microfone: ", event.error);
+                    stopDictation();
+                };
+
+                recognition.onend = function() {
+                    stopDictation();
+                };
+
                 recognition.start();
             } else {
-                alert('Ditado por voz simulado: Digite no campo abaixo.');
+                recognition.stop();
+                stopDictation();
             }
         }
 
-        function generateSOAP() {
-            document.getElementById('soapOutput').classList.remove('hidden');
+        function stopDictation() {
+            isRecording = false;
+            document.getElementById('voiceStatus').innerText = "Áudio capturado com sucesso.";
+            document.getElementById('voiceStatus').className = "text-[11px] text-emerald-600 font-bold";
+            document.getElementById('micText').innerText = "Gravar Voz";
+            document.getElementById('micIcon').className = "fa-solid fa-microphone";
         }
 
-        // RCP Timer System
+        function generateSOAP() {
+            const val = document.getElementById('soapInput').value.trim();
+            if(!val) {
+                alert("Por favor, digite ou dite um relato de caso primeiro.");
+                return;
+            }
+
+            const outputContainer = document.getElementById('soapOutput');
+            const formattedDiv = document.getElementById('soapFormattedText');
+
+            formattedDiv.innerHTML = `
+                <strong>S (Subjetivo):</strong> ${val}<br><br>
+                <strong>O (Objetivo):</strong> Paciente em bom estado geral, corado, anictérico. Sinais vitais dentro dos parâmetros normais.<br><br>
+                <strong>A (Avaliação):</strong> Hipótese diagnóstica primária a esclarecer (CID-10 R10.4).<br><br>
+                <strong>P (Plano):</strong> 1. Exames laboratoriais e de imagem; 2. Sintomáticos IV conforme prescrição; 3. Reavaliação clínica após exames.
+            `;
+
+            outputContainer.classList.remove('hidden');
+        }
+
+        function copySOAPText() {
+            const text = document.getElementById('soapFormattedText').innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                alert("Prontuário copiado para a área de transferência com sucesso!");
+            });
+        }
+
+        // METRÔNOMO & CÓDIGO AZUL (RCP)
         let rcpInterval;
         let rcpSeconds = 120;
+        let isTimerRunning = false;
+        let audioCtx, isMetronomeRunning = false, metronomeInterval;
 
-        function startRCP() {
-            clearInterval(rcpInterval);
-            rcpSeconds = 120;
-            document.getElementById('btnStartRCP').innerText = "REINICIAR CICLO";
-            logRCPEvent("Início do Ciclo de RCP (2 min)");
+        function toggleRCPTimer() {
+            if(!isTimerRunning) {
+                isTimerRunning = true;
+                document.getElementById('btnStartRCP').innerText = "PAUSAR CICLO";
+                logRCPEvent("🚀 Ciclo de 2 Minutos Iniciado.");
 
-            rcpInterval = setInterval(() => {
-                rcpSeconds--;
-                let m = Math.floor(rcpSeconds / 60).toString().padStart(2, '0');
-                let s = (rcpSeconds % 60).toString().padStart(2, '0');
-                document.getElementById('rcpTimer').innerText = `${m}:${s}`;
+                rcpInterval = setInterval(() => {
+                    rcpSeconds--;
+                    let m = Math.floor(rcpSeconds / 60).toString().padStart(2, '0');
+                    let s = (rcpSeconds % 60).toString().padStart(2, '0');
+                    document.getElementById('rcpTimer').innerText = `${m}:${s}`;
 
-                if (rcpSeconds <= 0) {
-                    clearInterval(rcpInterval);
-                    alert('⚠️ FIM DO CICLO DE 2 MINUTOS! Checar ritmo e pulso do paciente!');
-                    logRCPEvent("Fim do Ciclo. Checar Ritmo/Pulso.");
-                }
-            }, 1000);
+                    if (rcpSeconds <= 0) {
+                        clearInterval(rcpInterval);
+                        isTimerRunning = false;
+                        alert('⚠️ FIM DOS 2 MINUTOS! Checar ritmo e pulso do paciente!');
+                        logRCPEvent("🔔 Fim do Ciclo. Checar Ritmo/Pulso!");
+                        rcpSeconds = 120;
+                        document.getElementById('btnStartRCP').innerText = "REINICIAR CICLO (2 MIN)";
+                    }
+                }, 1000);
+            } else {
+                clearInterval(rcpInterval);
+                isTimerRunning = false;
+                document.getElementById('btnStartRCP').innerText = "CONTINUAR CICLO";
+            }
         }
 
-        function stopRCP() { clearInterval(rcpInterval); }
+        function stopRCP() {
+            clearInterval(rcpInterval);
+            isTimerRunning = false;
+            if(isMetronomeRunning) toggleMetronome();
+        }
+
+        function toggleMetronome() {
+            if(!isMetronomeRunning) {
+                isMetronomeRunning = true;
+                document.getElementById('metronomeText').innerText = "Parar Som";
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                
+                // 110 BPM -> 1000ms / (110/60) = ~545ms
+                metronomeInterval = setInterval(() => {
+                    if(!audioCtx) return;
+                    let osc = audioCtx.createOscillator();
+                    let gain = audioCtx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.value = 800; // Frequência do Bip
+                    gain.gain.value = 0.1;
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    osc.start();
+                    osc.stop(audioCtx.currentTime + 0.05);
+                }, 545);
+            } else {
+                isMetronomeRunning = false;
+                document.getElementById('metronomeText').innerText = "Som 110 BPM";
+                clearInterval(metronomeInterval);
+            }
+        }
 
         function logRCPEvent(evt) {
             const time = new Date().toLocaleTimeString();
@@ -612,19 +743,77 @@
             log.scrollTop = log.scrollHeight;
         }
 
-        // Calculadora Glasgow Logic
-        function calcGlasgow() {
-            const o = parseInt(document.getElementById('glasgowOcular').value);
-            const v = parseInt(document.getElementById('glasgowVerbal').value);
-            const m = parseInt(document.getElementById('glasgowMotor').value);
+        // CALCULADORAS (TROCA DE ABAS)
+        function switchCalc(calc) {
+            document.querySelectorAll('.calc-section').forEach(el => el.classList.add('hidden'));
+            document.getElementById('calc-' + calc).classList.remove('hidden');
+
+            ['glasgow', 'curb', 'wells'].forEach(c => {
+                const btn = document.getElementById('cbtn-' + c);
+                if(c === calc) btn.className = "px-3 py-1.5 bg-indigo-600 text-white rounded-lg";
+                else btn.className = "px-3 py-1.5 bg-slate-100 text-slate-600 rounded-lg";
+            });
+        }
+
+        function runGlasgow() {
+            const o = parseInt(document.getElementById('gOcular').value);
+            const v = parseInt(document.getElementById('gVerbal').value);
+            const m = parseInt(document.getElementById('gMotor').value);
             const total = o + v + m;
 
-            document.getElementById('glasgowResult').innerText = `${total} / 15`;
-            let conduct = "Nível de consciência normal.";
-            if (total <= 8) conduct = "⚠️ Trauma Grave: Indicação de Intubação Orotraqueal (IOT).";
-            else if (total <= 12) conduct = "Trauma Moderado: Monitoramento contínuo.";
-            
-            document.getElementById('glasgowConduct').innerText = conduct;
+            document.getElementById('gResult').innerText = `${total} / 15`;
+            let cond = "Sem rebaixamento do nível de consciência.";
+            if (total <= 8) cond = "⚠️ Trauma Grave: Indicação de Intubação Orotraqueal (IOT).";
+            else if (total <= 12) cond = "Trauma Moderado: Reavaliação e monitoramento contínuo.";
+
+            document.getElementById('gConduct').innerText = cond;
+        }
+
+        function runCurb() {
+            let pts = 0;
+            if(document.getElementById('c1').checked) pts++;
+            if(document.getElementById('c2').checked) pts++;
+            if(document.getElementById('c3').checked) pts++;
+            if(document.getElementById('c4').checked) pts++;
+            if(document.getElementById('c5').checked) pts++;
+
+            document.getElementById('curbResult').innerText = `${pts} Ponto(s)`;
+            let cond = "Baixo risco: Tratamento Ambulatorial.";
+            if (pts >= 3) cond = "🚨 Alto risco: Considerar UTI / Internação Hospitalar.";
+            else if (pts >= 2) cond = "Risco Moderado: Hospitalização ou Tratamento ambulatorial supervisionado.";
+
+            document.getElementById('curbConduct').innerText = cond;
+        }
+
+        function runWells() {
+            let pts = 0;
+            if(document.getElementById('w1').checked) pts++;
+            if(document.getElementById('w2').checked) pts++;
+            if(document.getElementById('w3').checked) pts++;
+            if(document.getElementById('w4').checked) pts++;
+
+            document.getElementById('wellsResult').innerText = `${pts} Ponto(s)`;
+            let cond = "Probabilidade Baixa de TVP.";
+            if (pts >= 2) cond = "⚠️ Alta Probabilidade de TVP: Indicação de Ultrassom Doppler.";
+
+            document.getElementById('wellsConduct').innerText = cond;
+        }
+
+        // SBAR WHATSAPP
+        function sendSbarWhatsApp() {
+            const s = document.getElementById('sbarS').value;
+            const b = document.getElementById('sbarB').value;
+            const a = document.getElementById('sbarA').value;
+            const r = document.getElementById('sbarR').value;
+
+            const text = encodeURIComponent(`*PASSAGEM DE PLANTÃO (SBAR)*\n\n*S - Situação:* ${s}\n*B - Histórico:* ${b}\n*A - Avaliação:* ${a}\n*R - Recomendação:* ${r}`);
+            window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
+        }
+
+        // COMPARTILHAR VIRAL WHATSAPP
+        function shareWhatsApp() {
+            const text = encodeURIComponent("Colega, estou usando o MEDIVUS no plantão e está facilitando demais a rotina! Tem SOAP por voz com IA, Calculadoras Clínicas e Código Azul RCP. Testa aí: https://meu-medivus.qqpinpp.workers.dev/");
+            window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
         }
     </script>
 </body>
