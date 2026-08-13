@@ -1,178 +1,631 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MEDIVUS - O Conhecimento que Salva Vidas</title>
-    <link rel="stylesheet" href="styles.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        medivus: {
+                            50: '#f0f6ff',
+                            100: '#e0edfe',
+                            500: '#2563eb',
+                            600: '#1d4ed8',
+                            700: '#1e40af',
+                            900: '#0f172a'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05);
+        }
+        .pulse-animation {
+            animation: pulse-red 1.2s infinite;
+        }
+        @keyframes pulse-red {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+            70% { transform: scale(1.03); box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+        }
+    </style>
 </head>
-<body>
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col justify-between selection:bg-blue-500 selection:text-white">
 
-    <header class="header">
-        <div class="container header-content">
-            <div class="logo">
-                <i data-lucide="activity" class="logo-icon-svg"></i>
+    <!-- TOP BAR / HEADER -->
+    <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200 px-4 py-3 shadow-sm">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <!-- Logo Medivus -->
+            <div class="flex items-center gap-3 cursor-pointer" onclick="switchTab('plantao')">
+                <div class="bg-blue-600 text-white p-2 rounded-xl shadow-md shadow-blue-500/20">
+                    <i class="fa-solid fa-shield-halved text-xl"></i>
+                </div>
                 <div>
-                    <span class="logo-text">MEDIVUS</span>
-                    <span class="logo-sub">Intelligentia Clinica</span>
+                    <h1 class="font-extrabold text-xl tracking-tight text-slate-900 leading-none">MEDIVUS</h1>
+                    <span class="text-[10px] font-semibold tracking-wider text-blue-600 uppercase">Copiloto Médico Inteligente</span>
                 </div>
             </div>
-            <nav class="nav">
-                <a href="#simulador" class="nav-link">Testar IA</a>
-                <a href="#recursos" class="nav-link">Recursos</a>
-                <a href="#planos" class="nav-link highlight-link">Planos</a>
-                <button id="theme-toggle" class="btn-icon" aria-label="Modo Noturno">
-                    <i data-lucide="moon"></i>
+
+            <!-- Botões de Ação Rápida no Topo -->
+            <div class="flex items-center gap-2">
+                <!-- Botão Viral WhatsApp -->
+                <button onclick="shareWhatsApp()" class="hidden md:flex items-center gap-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 px-3 py-1.5 rounded-lg text-xs font-semibold transition">
+                    <i class="fa-brands fa-whatsapp text-emerald-600 text-sm"></i>
+                    <span>Ajudar um Colega</span>
                 </button>
-            </nav>
+
+                <!-- Botão Assinar / Status Pro -->
+                <button onclick="openModal('checkoutModal')" class="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-4 py-1.5 rounded-lg text-xs font-bold shadow-md shadow-blue-500/20 flex items-center gap-2 transition transform active:scale-95">
+                    <i class="fa-solid fa-crown text-amber-300"></i>
+                    <span>SEJA PRO</span>
+                </button>
+            </div>
         </div>
     </header>
 
-    <section class="hero" id="simulador">
-        <div class="container hero-grid">
-            <div class="hero-content">
-                <div class="badge-group">
-                    <span class="badge badge-amber">⚡ Exclusivo para Médicos</span>
+    <!-- BANNER PWA (INSTALAÇÃO) -->
+    <div id="pwaBanner" class="bg-slate-900 text-white px-4 py-2.5 text-xs flex items-center justify-between border-b border-slate-800">
+        <div class="flex items-center gap-2 max-w-4xl">
+            <i class="fa-solid fa-mobile-screen-button text-blue-400 text-sm"></i>
+            <span><strong>Acesso Rápido no Plantão:</strong> Adicione o Medivus na tela inicial do seu celular.</span>
+        </div>
+        <div class="flex items-center gap-3">
+            <button onclick="alert('No Chrome/Safari: toque em Opções (3 pontos ou Compartilhar) e selecione \'Adicionar à Tela Inicial\'.')" class="bg-blue-600 hover:bg-blue-500 px-3 py-1 rounded-md font-semibold text-white transition">Instalar App</button>
+            <button onclick="document.getElementById('pwaBanner').style.display='none'" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+    </div>
+
+    <!-- CONTEÚDO PRINCIPAL (MÓDULOS) -->
+    <main class="max-w-7xl mx-auto px-4 py-6 flex-1 w-full">
+
+        <!-- BARRA DE BUSCA GLOBAL UNIFICADA -->
+        <div class="mb-8 max-w-3xl mx-auto">
+            <div class="relative">
+                <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-lg"></i>
+                <input type="text" placeholder="Buscar conduta, dose de antibiótico, calculadora ou CID-10..." class="w-full pl-12 pr-28 py-3.5 bg-white border border-slate-200 rounded-2xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-600 text-sm font-medium transition">
+                <button class="absolute right-2 top-1/2 -translate-y-1/2 bg-blue-600 text-white px-4 py-2 rounded-xl text-xs font-semibold hover:bg-blue-700 transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    <span>IA Buscar</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- ABA 1: PLANTÃO (Foco em Agilidade e Decisão Crítica) -->
+        <section id="tab-plantao" class="tab-content block">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-xs font-bold text-slate-400 uppercase tracking-wider flex items-center gap-2">
+                    <i class="fa-solid fa-stethoscope text-blue-600"></i> Ferramentas de Plantão & Emergência
+                </h2>
+                <span class="text-[11px] bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full font-semibold">Modo Ultra-Rápido</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                
+                <!-- SOAP Pro -->
+                <div onclick="openModal('soapModal')" class="glass-card p-5 rounded-2xl hover:border-blue-500/50 hover:shadow-lg transition cursor-pointer group relative overflow-hidden">
+                    <div class="flex items-start justify-between mb-3">
+                        <div class="p-3 bg-blue-50 text-blue-600 rounded-xl group-hover:bg-blue-600 group-hover:text-white transition">
+                            <i class="fa-solid fa-clipboard-user text-xl"></i>
+                        </div>
+                        <span class="text-[10px] font-bold bg-blue-100 text-blue-700 px-2 py-0.5 rounded">IA VOZ</span>
+                    </div>
+                    <h3 class="font-bold text-slate-900 group-hover:text-blue-600 transition">SOAP Pro</h3>
+                    <p class="text-xs text-slate-500 mt-1">Estruture prontuários completos ditando por voz. Doses, conduta e CID-10 automáticos.</p>
                 </div>
-                <h1 class="hero-title">
-                    Chega de perder horas digitando prontuários no <span class="highlight">plantão.</span>
-                </h1>
-                <p class="hero-description">
-                    O primeiro assistente clínico de elite. Gera evoluções SOAP, cálculos precisos e condutas atualizadas em menos de 3 segundos.
-                </p>
-                <div class="hero-features">
-                    <span><i data-lucide="check-circle-2"></i> SOAP Automático</span>
-                    <span><i data-lucide="copy"></i> Copia e Cola no MV/TOTVS</span>
-                    <span><i data-lucide="wifi-off"></i> Funciona Offline</span>
+
+                <!-- Emergências RCP / Código Azul -->
+                <div onclick="openModal('rcpModal')" class="glass-card p-5 rounded-2xl border-red-200 hover:border-red-500 hover:shadow-lg transition cursor-pointer group relative overflow-hidden bg-gradient-to-br from-white to-red-50/30">
+                    <div class="flex items-start justify-between mb-3">
+                        <div class="p-3 bg-red-100 text-red-600 rounded-xl group-hover:bg-red-600 group-hover:text-white transition">
+                            <i class="fa-solid fa-heart-pulse text-xl"></i>
+                        </div>
+                        <span class="text-[10px] font-bold bg-red-100 text-red-700 px-2 py-0.5 rounded animate-pulse">EMERGÊNCIA</span>
+                    </div>
+                    <h3 class="font-bold text-slate-900 group-hover:text-red-600 transition">Emergências RCP (Código Azul)</h3>
+                    <p class="text-xs text-slate-500 mt-1">Cronômetro de ciclos de 2 min, metrônomo sonoro de compressão e alerta de Adrenalina.</p>
+                </div>
+
+                <!-- Calculadoras Clínicas -->
+                <div onclick="openModal('calcModal')" class="glass-card p-5 rounded-2xl hover:border-blue-500/50 hover:shadow-lg transition cursor-pointer group">
+                    <div class="flex items-start justify-between mb-3">
+                        <div class="p-3 bg-indigo-50 text-indigo-600 rounded-xl group-hover:bg-indigo-600 group-hover:text-white transition">
+                            <i class="fa-solid fa-calculator text-xl"></i>
+                        </div>
+                        <span class="text-[10px] font-bold bg-slate-100 text-slate-600 px-2 py-0.5 rounded">Exato</span>
+                    </div>
+                    <h3 class="font-bold text-slate-900 group-hover:text-indigo-600 transition">Calculadoras Clínicas</h3>
+                    <p class="text-xs text-slate-500 mt-1">Glasgow, Wells, CURB-65, SOFA e Ajuste de dose por Função Renal instantâneos.</p>
+                </div>
+
+                <!-- Transferência Segura SBAR Pro -->
+                <div onclick="openModal('sbarModal')" class="glass-card p-5 rounded-2xl hover:border-blue-500/50 hover:shadow-lg transition cursor-pointer group">
+                    <div class="flex items-start justify-between mb-3">
+                        <div class="p-3 bg-teal-50 text-teal-600 rounded-xl group-hover:bg-teal-600 group-hover:text-white transition">
+                            <i class="fa-solid fa-right-left text-xl"></i>
+                        </div>
+                    </div>
+                    <h3 class="font-bold text-slate-900 group-hover:text-teal-600 transition">Transferência Segura (SBAR Pro)</h3>
+                    <p class="text-xs text-slate-500 mt-1">Formatador de passagem de plantão pronto para envio limpo no WhatsApp da equipe.</p>
+                </div>
+
+                <!-- Consulta Rápida com IA -->
+                <div onclick="alert('Digite sua dúvida na barra de busca superior para ativar a IA de Consulta Rápida.')" class="glass-card p-5 rounded-2xl hover:border-blue-500/50 hover:shadow-lg transition cursor-pointer group">
+                    <div class="flex items-start justify-between mb-3">
+                        <div class="p-3 bg-sky-50 text-sky-600 rounded-xl group-hover:bg-sky-600 group-hover:text-white transition">
+                            <i class="fa-solid fa-magnifying-glass-plus text-xl"></i>
+                        </div>
+                    </div>
+                    <h3 class="font-bold text-slate-900 group-hover:text-sky-600 transition">Consulta Rápida</h3>
+                    <p class="text-xs text-slate-500 mt-1">Busca cirúrgica por sintomas, diagnósticos diferenciais e posologias pediátricas/adulto.</p>
+                </div>
+
+                <!-- Guias de Bolso -->
+                <div onclick="alert('Abrindo biblioteca de Condutas Rápidas de Bolso...')" class="glass-card p-5 rounded-2xl hover:border-blue-500/50 hover:shadow-lg transition cursor-pointer group">
+                    <div class="flex items-start justify-between mb-3">
+                        <div class="p-3 bg-amber-50 text-amber-600 rounded-xl group-hover:bg-amber-600 group-hover:text-white transition">
+                            <i class="fa-solid fa-book-medical text-xl"></i>
+                        </div>
+                    </div>
+                    <h3 class="font-bold text-slate-900 group-hover:text-amber-600 transition">Guias de Bolso</h3>
+                    <p class="text-xs text-slate-500 mt-1">Fluxogramas rápidos de Conduta: Cetoacidose, Infarto (IAM), Sepse e Crise Convulsiva.</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ABA 2: ESTUDO (Foco em Residência e Retenção) -->
+        <section id="tab-estudo" class="tab-content hidden">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-xs font-bold text-slate-400 uppercase tracking-wider flex items-center gap-2">
+                    <i class="fa-solid fa-graduation-cap text-indigo-600"></i> Preparatório de Residência & Atualização
+                </h2>
+                <span class="text-[11px] bg-indigo-100 text-indigo-800 px-2.5 py-0.5 rounded-full font-bold flex items-center gap-1">
+                    <i class="fa-solid fa-fire text-amber-500"></i> 5 Dias Seguidos
+                </span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+
+                <!-- NotebookLM + IA -->
+                <div class="glass-card p-5 rounded-2xl hover:border-indigo-500/50 transition cursor-pointer group">
+                    <div class="p-3 bg-purple-50 text-purple-600 rounded-xl w-fit mb-3 group-hover:bg-purple-600 group-hover:text-white transition">
+                        <i class="fa-solid fa-file-pdf text-xl"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-900 group-hover:text-purple-600 transition">NotebookLM + IA</h3>
+                    <p class="text-xs text-slate-500 mt-1">Faça upload de PDFs de diretrizes e artigos. A IA resume e responde perguntas do documento.</p>
+                </div>
+
+                <!-- Flashcards IA -->
+                <div class="glass-card p-5 rounded-2xl hover:border-indigo-500/50 transition cursor-pointer group">
+                    <div class="p-3 bg-amber-50 text-amber-600 rounded-xl w-fit mb-3 group-hover:bg-amber-600 group-hover:text-white transition">
+                        <i class="fa-solid fa-layer-group text-xl"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-900 group-hover:text-amber-600 transition">Flashcards IA (SRS)</h3>
+                    <p class="text-xs text-slate-500 mt-1">Repetição Espaçada inteligente estilo Anki. Cards automatizados sobre qualquer especialidade.</p>
+                </div>
+
+                <!-- Questões Comentadas -->
+                <div class="glass-card p-5 rounded-2xl hover:border-indigo-500/50 transition cursor-pointer group">
+                    <div class="p-3 bg-emerald-50 text-emerald-600 rounded-xl w-fit mb-3 group-hover:bg-emerald-600 group-hover:text-white transition">
+                        <i class="fa-solid fa-list-check text-xl"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-900 group-hover:text-emerald-600 transition">Questões Comentadas</h3>
+                    <p class="text-xs text-slate-500 mt-1">Banco de provas de residência (USP, ENARE, AMP) com justificativa do porquê dos erros.</p>
+                </div>
+
+                <!-- Simulado Prova -->
+                <div class="glass-card p-5 rounded-2xl hover:border-indigo-500/50 transition cursor-pointer group">
+                    <div class="p-3 bg-rose-50 text-rose-600 rounded-xl w-fit mb-3 group-hover:bg-rose-600 group-hover:text-white transition">
+                        <i class="fa-solid fa-bullseye text-xl"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-900 group-hover:text-rose-600 transition">Simulado de Prova</h3>
+                    <p class="text-xs text-slate-500 mt-1">Treine com cronômetro real e gabarito estatístico de desempenho por grande área.</p>
+                </div>
+
+                <!-- Biblioteca Médica -->
+                <div class="glass-card p-5 rounded-2xl hover:border-indigo-500/50 transition cursor-pointer group">
+                    <div class="p-3 bg-blue-50 text-blue-600 rounded-xl w-fit mb-3 group-hover:bg-blue-600 group-hover:text-white transition">
+                        <i class="fa-solid fa-book text-xl"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-900 group-hover:text-blue-600 transition">Biblioteca Médica</h3>
+                    <p class="text-xs text-slate-500 mt-1">Acesso organizado por grandes áreas: Pediatria, GO, Cirurgia, Clínica e Preventiva.</p>
+                </div>
+
+                <!-- Cronograma de Estudos -->
+                <div class="glass-card p-5 rounded-2xl hover:border-indigo-500/50 transition cursor-pointer group">
+                    <div class="p-3 bg-teal-50 text-teal-600 rounded-xl w-fit mb-3 group-hover:bg-teal-600 group-hover:text-white transition">
+                        <i class="fa-solid fa-calendar-check text-xl"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-900 group-hover:text-teal-600 transition">Cronograma de Estudos</h3>
+                    <p class="text-xs text-slate-500 mt-1">Planejamento semanal personalizado de acordo com a data da sua prova de residência.</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ABA 3: RESIDENTE / DESEMPENHO -->
+        <section id="tab-residente" class="tab-content hidden">
+            <div class="glass-card p-6 rounded-2xl mb-6">
+                <div class="flex items-center gap-4">
+                    <div class="w-16 h-16 bg-blue-600 text-white rounded-2xl flex items-center justify-center text-2xl font-bold shadow-md shadow-blue-500/30">
+                        DR
+                    </div>
+                    <div>
+                        <h2 class="text-lg font-bold text-slate-900">Dr. Médico Usuário</h2>
+                        <p class="text-xs text-slate-500">Residência em Clínica Médica • CRM Ativo</p>
+                        <span class="inline-block mt-2 text-[10px] bg-amber-100 text-amber-800 font-bold px-2.5 py-0.5 rounded-full">MEMBRO PRO ATIVO</span>
+                    </div>
                 </div>
             </div>
-            
-            <!-- SIMULADOR DE IA -->
-            <div class="hero-visual">
-                <div class="ia-simulator">
-                    <div class="simulator-header">
-                        <i data-lucide="bot"></i> Simulador SOAP Pro
+
+            <!-- Gráfico de Desempenho Simulado -->
+            <div class="glass-card p-6 rounded-2xl">
+                <h3 class="font-bold text-slate-900 mb-4 flex items-center gap-2 text-sm">
+                    <i class="fa-solid fa-chart-line text-blue-600"></i> Desempenho em Simulados
+                </h3>
+                <div class="space-y-3 text-xs">
+                    <div>
+                        <div class="flex justify-between font-semibold mb-1">
+                            <span>Clínica Médica</span>
+                            <span class="text-emerald-600">82%</span>
+                        </div>
+                        <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                            <div class="bg-emerald-500 h-full rounded-full" style="width: 82%"></div>
+                        </div>
                     </div>
-                    <div class="simulator-body">
-                        <label>Digite como falaria no plantão:</label>
-                        <textarea id="ia-input" rows="3" placeholder="Ex: Paciente 45 anos, masculino, dor torácica atípica há 2h, PA 150x90..."></textarea>
-                        <button id="btn-gerar" class="btn-primary btn-block">Gerar Prontuário Inteligente <i data-lucide="zap"></i></button>
-                        
-                        <div id="ia-result" class="ia-result hidden">
-                            <div class="result-content" id="result-text"></div>
-                            <button id="btn-copy" class="btn-secondary btn-small"><i data-lucide="copy"></i> Copiar para Prontuário Eletrônico</button>
+                    <div>
+                        <div class="flex justify-between font-semibold mb-1">
+                            <span>Cirurgia Geral</span>
+                            <span class="text-blue-600">74%</span>
+                        </div>
+                        <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                            <div class="bg-blue-500 h-full rounded-full" style="width: 74%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between font-semibold mb-1">
+                            <span>Pediatria</span>
+                            <span class="text-amber-600">65%</span>
+                        </div>
+                        <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                            <div class="bg-amber-500 h-full rounded-full" style="width: 65%"></div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="perfis" id="recursos">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">O Fator "Uau" da sua <span class="highlight">Rotina</span></h2>
-                <p class="section-subtitle">Ferramentas mágicas projetadas para zerar o estresse clínico</p>
-            </div>
-            <div class="perfis-grid">
-                <div class="perfil-card">
-                    <div class="perfil-icon"><i data-lucide="copy-check"></i></div>
-                    <h3>Copia e Cola Instantâneo</h3>
-                    <p>O texto do SOAP já sai formatado perfeitamente. Um clique e você cola no sistema do hospital sem precisar reformatar linhas.</p>
-                </div>
-                <div class="perfil-card">
-                    <div class="perfil-icon"><i data-lucide="moon-star"></i></div>
-                    <h3>Modo Plantão Noturno</h3>
-                    <p>Interface OLED True-Black com redução de luz azul. Não cansa os olhos durante o plantão da madrugada.</p>
-                </div>
-                <div class="perfil-card">
-                    <div class="perfil-icon"><i data-lucide="activity-square"></i></div>
-                    <h3>Calculadoras Visuais</h3>
-                    <p>Esqueça digitar números. Use sliders visuais na tela para calcular Nora, Fentanil e Dobutamina instantaneamente.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+    </main>
 
-    <!-- CHECKOUT MERCADO PAGO -->
-    <section class="pricing-section" id="planos">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-tag" style="background: var(--amber); color: white; padding: 4px 12px; border-radius: 20px; font-weight: bold;">Acesso Imediato</span>
-                <h2 class="section-title">O lugar ideal para <span class="highlight">trabalhar</span></h2>
-                <p class="section-subtitle">Sem burocracia. Pagamento processado pelo Mercado Pago. Cancele quando quiser.</p>
-            </div>
-
-            <div class="pricing-grid">
-                <!-- MENSAL -->
-                <div class="pricing-card">
-                    <div class="card-header">
-                        <h3>Pro Plantão Mensal</h3>
-                        <p>Flexibilidade total para o dia a dia</p>
-                    </div>
-                    <div class="price">
-                        <span class="currency">R$</span>
-                        <span class="amount">49</span><span class="cents">,90</span>
-                        <span class="period">/mês</span>
-                    </div>
-                    <ul class="features-list">
-                        <li><i data-lucide="check"></i> SOAP Pro com IA Ilimitado</li>
-                        <li><i data-lucide="check"></i> Calculadoras & Protocolos Offline</li>
-                        <li><i data-lucide="check"></i> Suporte Prioritário</li>
-                    </ul>
-                    <!-- COLE SEU LINK DO MERCADO PAGO AQUI -->
-                    <a href="https://mpago.la/SEU_LINK_MENSAL" target="_blank" class="btn-secondary btn-block mp-btn">Assinar Plano Mensal</a>
-                </div>
-
-                <!-- ANUAL -->
-                <div class="pricing-card featured">
-                    <div class="badge-pop">MAIS POPULAR • ECONOMIZE 33%</div>
-                    <div class="card-header">
-                        <h3>VIP Anual Passaporte</h3>
-                        <p>Para quem quer dominar a medicina</p>
-                    </div>
-                    <div class="price">
-                        <span class="currency">R$</span>
-                        <span class="amount">399</span><span class="cents">,00</span>
-                        <span class="period">/ano</span>
-                    </div>
-                    <p class="equivalent">Equivalente a apenas R$ 33,25/mês</p>
-                    <ul class="features-list">
-                        <li><i data-lucide="check"></i> <strong>Tudo do Plano Mensal</strong></li>
-                        <li><i data-lucide="check"></i> Flashcards e Simulados Inteligentes</li>
-                        <li><i data-lucide="check"></i> Casos Clínicos Avançados</li>
-                        <li><i data-lucide="check"></i> Acesso Antecipado a Novas IAs</li>
-                    </ul>
-                    <!-- COLE SEU LINK DO MERCADO PAGO AQUI -->
-                    <a href="https://mpago.la/SEU_LINK_ANUAL" target="_blank" class="btn-primary btn-block mp-btn">Assinar VIP Anual ➔</a>
-                </div>
-            </div>
+    <!-- NAVEGAÇÃO INFERIOR FIXA (ESTILO APP NATIVO) -->
+    <nav class="sticky bottom-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200 px-6 py-2 shadow-lg">
+        <div class="max-w-md mx-auto flex items-center justify-around">
             
-            <div class="mp-trust">
-                <i data-lucide="lock"></i> Pagamento 100% Seguro processado via Mercado Pago (PIX e Cartão)
+            <button onclick="switchTab('plantao')" id="nav-plantao" class="flex flex-col items-center gap-1 text-blue-600 font-bold">
+                <i class="fa-solid fa-kit-medical text-lg"></i>
+                <span class="text-[11px]">PLANTÃO</span>
+            </button>
+
+            <button onclick="switchTab('estudo')" id="nav-estudo" class="flex flex-col items-center gap-1 text-slate-400 font-medium hover:text-slate-600">
+                <i class="fa-solid fa-book-open text-lg"></i>
+                <span class="text-[11px]">ESTUDO</span>
+            </button>
+
+            <button onclick="switchTab('residente')" id="nav-residente" class="flex flex-col items-center gap-1 text-slate-400 font-medium hover:text-slate-600">
+                <i class="fa-solid fa-user-doctor text-lg"></i>
+                <span class="text-[11px]">RESIDENTE</span>
+            </button>
+
+        </div>
+    </nav>
+
+    <!-- ==================== MODAIS DE FUNCIONALIDADES ==================== -->
+
+    <!-- MODAL SOAP PRO -->
+    <div id="soapModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-2xl w-full p-6 shadow-2xl max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+                <h3 class="font-bold text-slate-900 flex items-center gap-2">
+                    <i class="fa-solid fa-clipboard-user text-blue-600"></i> SOAP Pro - Gerador de Prontuário
+                </h3>
+                <button onclick="closeModal('soapModal')" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+
+            <div class="mt-4 space-y-4 text-xs">
+                <div>
+                    <label class="block font-bold text-slate-700 mb-1">Relato por Voz ou Texto:</label>
+                    <div class="relative">
+                        <textarea id="soapInput" rows="3" placeholder="Ex: Paciente 30 anos, dor abdominal em fossa ilíaca direita há 12h, febre 38.2°C, Sinal de Blumberg positivo..." class="w-full p-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500/20 focus:border-blue-600 outline-none"></textarea>
+                        <button onclick="startVoiceDictation()" class="absolute right-3 bottom-3 bg-red-100 hover:bg-red-200 text-red-600 p-2 rounded-lg font-bold flex items-center gap-1">
+                            <i class="fa-solid fa-microphone"></i> Dictar
+                        </button>
+                    </div>
+                </div>
+
+                <button onclick="generateSOAP()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 rounded-xl transition shadow-md shadow-blue-500/20">
+                    Gerar Prontuário Estruturado
+                </button>
+
+                <div id="soapOutput" class="hidden bg-slate-50 p-4 rounded-xl border border-slate-200 font-mono text-[11px] leading-relaxed">
+                    <strong>S (Subjetivo):</strong> Paciente 30 anos relata dor aguda em fossa ilíaca direita associada a febre e náuseas.<br>
+                    <strong>O (Objetivo):</strong> T: 38.2°C, Descompressão dolorosa positiva em ponto de McBurney.<br>
+                    <strong>A (Avaliação):</strong> Suspeita clínica alta para Apendicite Aguda (CID-10: K35).<br>
+                    <strong>P (Plano):</strong> Jejum, USG/TC de Abdome total, Analgesia e Parecer da Cirurgia Geral.
+                    
+                    <button onclick="navigator.clipboard.writeText(document.getElementById('soapOutput').innerText); alert('Prontuário copiado com sucesso!')" class="mt-3 bg-slate-900 text-white font-sans px-3 py-1.5 rounded-lg font-semibold flex items-center gap-1.5">
+                        <i class="fa-solid fa-copy"></i> Copiar para Prontuário
+                    </button>
+                </div>
             </div>
         </div>
-    </section>
+    </div>
 
-    <footer class="footer">
-        <div class="container footer-grid">
-            <div>
-                <div class="logo-text" style="color: white; font-size: 1.5rem; margin-bottom: 1rem;">MEDIVUS</div>
-                <p>O conhecimento que salva vidas.</p>
+    <!-- MODAL EMERGÊNCIAS RCP (CÓDIGO AZUL) -->
+    <div id="rcpModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+                <h3 class="font-bold text-red-600 flex items-center gap-2">
+                    <i class="fa-solid fa-heart-pulse text-red-600"></i> Código Azul - RCP Ativa
+                </h3>
+                <button onclick="closeModal('rcpModal'); stopRCP();" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
             </div>
-            <div>
-                <h5>Recursos</h5>
-                <ul><li><a href="#">SOAP Pro</a></li><li><a href="#">Calculadoras</a></li></ul>
-            </div>
-            <div>
-                <h5>Embaixadores</h5>
-                <ul><li><a href="#">Plano de Carreira Médico</a></li><li><a href="#">Área do Afiliado</a></li></ul>
+
+            <div class="mt-6 text-center">
+                <div class="text-4xl font-extrabold font-mono text-slate-900 mb-1" id="rcpTimer">02:00</div>
+                <span class="text-xs text-slate-500 font-medium">Tempo do Ciclo Atual</span>
+
+                <div class="my-6 flex justify-center gap-3">
+                    <button id="btnStartRCP" onclick="startRCP()" class="bg-red-600 hover:bg-red-700 text-white font-bold px-6 py-3 rounded-xl shadow-lg shadow-red-500/30 transition text-sm">
+                        INICIAR CICLO (2 MIN)
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-2 gap-2 text-xs">
+                    <button onclick="logRCPEvent('Adrenalina 1mg Administrada')" class="bg-slate-100 hover:bg-slate-200 p-2.5 rounded-xl font-bold text-slate-700">
+                        💉 Adrenalina (1mg)
+                    </button>
+                    <button onclick="logRCPEvent('Choque Aplicado')" class="bg-amber-100 hover:bg-amber-200 p-2.5 rounded-xl font-bold text-amber-800">
+                        ⚡ Choque Aplicado
+                    </button>
+                </div>
+
+                <div id="rcpLog" class="mt-4 bg-slate-50 p-3 rounded-xl border border-slate-200 text-left text-[11px] h-24 overflow-y-auto font-mono text-slate-600">
+                    <em>Registro de Eventos da Parada Cardíaca...</em>
+                </div>
             </div>
         </div>
-    </footer>
+    </div>
 
-    <script src="script.js"></script>
+    <!-- MODAL CALCULADORAS CLÍNICAS -->
+    <div id="calcModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+                <h3 class="font-bold text-slate-900 flex items-center gap-2">
+                    <i class="fa-solid fa-calculator text-indigo-600"></i> Escala de Coma de Glasgow
+                </h3>
+                <button onclick="closeModal('calcModal')" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+
+            <div class="mt-4 space-y-3 text-xs">
+                <div>
+                    <label class="font-bold text-slate-700">Abertura Ocular:</label>
+                    <select id="glasgowOcular" onchange="calcGlasgow()" class="w-full mt-1 p-2 border border-slate-200 rounded-lg">
+                        <option value="4">Spontânea (4)</option>
+                        <option value="3">Ao comando verbal (3)</option>
+                        <option value="2">À dor (2)</option>
+                        <option value="1">Nenhuma (1)</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="font-bold text-slate-700">Resposta Verbal:</label>
+                    <select id="glasgowVerbal" onchange="calcGlasgow()" class="w-full mt-1 p-2 border border-slate-200 rounded-lg">
+                        <option value="5">Orientado (5)</option>
+                        <option value="4">Confuso (4)</option>
+                        <option value="3">Palavras desconexas (3)</option>
+                        <option value="2">Sons incompreensíveis (2)</option>
+                        <option value="1">Nenhuma (1)</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="font-bold text-slate-700">Resposta Motora:</label>
+                    <select id="glasgowMotor" onchange="calcGlasgow()" class="w-full mt-1 p-2 border border-slate-200 rounded-lg">
+                        <option value="6">Obedece comandos (6)</option>
+                        <option value="5">Localiza a dor (5)</option>
+                        <option value="4">Flexão normal / Retirada (4)</option>
+                        <option value="3">Flexão anômala / Decorticação (3)</option>
+                        <option value="2">Extensão anômala / Descerebração (2)</option>
+                        <option value="1">Nenhuma (1)</option>
+                    </select>
+                </div>
+
+                <div class="bg-indigo-50 p-4 rounded-xl text-center border border-indigo-100 mt-4">
+                    <span class="text-xs text-indigo-600 font-bold block">PONTUAÇÃO TOTAL GLASGOW</span>
+                    <span id="glasgowResult" class="text-3xl font-extrabold text-indigo-900">15 / 15</span>
+                    <p id="glasgowConduct" class="text-[11px] text-indigo-700 mt-1 font-medium">Nível de consciência normal.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL CHECKOUT / ASSINATURA MERCADO PAGO -->
+    <div id="checkoutModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-xl w-full p-6 shadow-2xl border border-slate-100">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-crown text-amber-500 text-xl"></i>
+                    <h3 class="font-extrabold text-slate-900">Seja Medivus PRO</h3>
+                </div>
+                <button onclick="closeModal('checkoutModal')" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+
+            <p class="text-xs text-slate-500 mt-2">Acesso ilimitado ao SOAP Pro por Voz, Código Azul RCP, Banco de Questões e Calculadoras Clínicas sem restrições.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+                <!-- Plano Mensal -->
+                <div class="border border-slate-200 rounded-2xl p-4 flex flex-col justify-between hover:border-blue-500 transition">
+                    <div>
+                        <span class="text-[10px] font-bold text-slate-400 uppercase">Flexível</span>
+                        <h4 class="font-bold text-slate-900 text-sm mt-1">Plano Mensal</h4>
+                        <div class="mt-2">
+                            <span class="text-2xl font-extrabold text-slate-900">R$ 59,90</span>
+                            <span class="text-xs text-slate-500">/mês</span>
+                        </div>
+                        <ul class="text-[11px] text-slate-600 space-y-1.5 mt-3">
+                            <li><i class="fa-solid fa-check text-emerald-500 mr-1"></i> Acesso total sem fidelidade</li>
+                            <li><i class="fa-solid fa-check text-emerald-500 mr-1"></i> Cancele a qualquer momento</li>
+                        </ul>
+                    </div>
+                    <a href="https://mpago.la/2phgnwF" target="_blank" class="mt-4 block text-center bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold py-2.5 rounded-xl transition">
+                        Assinar Mensal
+                    </a>
+                </div>
+
+                <!-- Plano Anual (Destaque) -->
+                <div class="border-2 border-blue-600 rounded-2xl p-4 bg-blue-50/30 flex flex-col justify-between relative overflow-hidden shadow-lg shadow-blue-500/10">
+                    <span class="absolute top-0 right-0 bg-blue-600 text-white text-[9px] font-extrabold px-2 py-0.5 rounded-bl-lg uppercase tracking-wider">
+                        ECONOMIZE 33%
+                    </span>
+                    <div>
+                        <span class="text-[10px] font-bold text-blue-600 uppercase">Mais Popular</span>
+                        <h4 class="font-bold text-slate-900 text-sm mt-1">Plano Anual PRO</h4>
+                        <div class="mt-2">
+                            <span class="text-xs text-slate-500 block">12x de</span>
+                            <span class="text-2xl font-extrabold text-blue-600">R$ 39,90</span>
+                            <span class="text-xs text-slate-500">/mês</span>
+                        </div>
+                        <ul class="text-[11px] text-slate-600 space-y-1.5 mt-3">
+                            <li><i class="fa-solid fa-check text-emerald-500 mr-1"></i> Equivale a R$ 478,80/ano</li>
+                            <li><i class="fa-solid fa-check text-emerald-500 mr-1"></i> Economize R$ 240,00 por ano</li>
+                            <li><i class="fa-solid fa-check text-emerald-500 mr-1"></i> Garantia incondicional 7 dias</li>
+                        </ul>
+                    </div>
+                    <a href="https://mpago.la/1s4czMx" target="_blank" class="mt-4 block text-center bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold py-2.5 rounded-xl transition shadow-md shadow-blue-500/20">
+                        Assinar Anual (Melhor Valor)
+                    </a>
+                </div>
+            </div>
+
+            <div class="mt-4 text-center">
+                <span class="text-[10px] text-slate-400 flex items-center justify-center gap-1">
+                    <i class="fa-solid fa-lock"></i> Pagamento seguro processado pelo Mercado Pago
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPT JS DE LÓGICA & INTERATIVIDADE -->
+    <script>
+        // Navegação entre Abas
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById('tab-' + tabName).classList.remove('hidden');
+
+            // Atualiza botões da nav
+            ['plantao', 'estudo', 'residente'].forEach(t => {
+                const btn = document.getElementById('nav-' + t);
+                if (t === tabName) {
+                    btn.className = 'flex flex-col items-center gap-1 text-blue-600 font-bold';
+                } else {
+                    btn.className = 'flex flex-col items-center gap-1 text-slate-400 font-medium hover:text-slate-600';
+                }
+            });
+        }
+
+        // Modais Control
+        function openModal(id) { document.getElementById(id).classList.remove('hidden'); }
+        function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
+
+        // Compartilhamento Viral WhatsApp
+        function shareWhatsApp() {
+            const text = encodeURIComponent("Colega, estou usando o MEDIVUS no plantão e está salvando minha rotina! Tem SOAP por voz com IA, Calculadoras e Código Azul RCP. Testa aí: https://meu-medivus.qqpinpp.workers.dev/");
+            window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
+        }
+
+        // SOAP Dictation Placeholder
+        function startVoiceDictation() {
+            if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+                const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+                const recognition = new SpeechRecognition();
+                recognition.lang = 'pt-BR';
+                recognition.onstart = function() {
+                    alert('Gravando... Fale os dados do paciente.');
+                };
+                recognition.onresult = function(event) {
+                    document.getElementById('soapInput').value = event.results[0][0].transcript;
+                };
+                recognition.start();
+            } else {
+                alert('Ditado por voz simulado: Digite no campo abaixo.');
+            }
+        }
+
+        function generateSOAP() {
+            document.getElementById('soapOutput').classList.remove('hidden');
+        }
+
+        // RCP Timer System
+        let rcpInterval;
+        let rcpSeconds = 120;
+
+        function startRCP() {
+            clearInterval(rcpInterval);
+            rcpSeconds = 120;
+            document.getElementById('btnStartRCP').innerText = "REINICIAR CICLO";
+            logRCPEvent("Início do Ciclo de RCP (2 min)");
+
+            rcpInterval = setInterval(() => {
+                rcpSeconds--;
+                let m = Math.floor(rcpSeconds / 60).toString().padStart(2, '0');
+                let s = (rcpSeconds % 60).toString().padStart(2, '0');
+                document.getElementById('rcpTimer').innerText = `${m}:${s}`;
+
+                if (rcpSeconds <= 0) {
+                    clearInterval(rcpInterval);
+                    alert('⚠️ FIM DO CICLO DE 2 MINUTOS! Checar ritmo e pulso do paciente!');
+                    logRCPEvent("Fim do Ciclo. Checar Ritmo/Pulso.");
+                }
+            }, 1000);
+        }
+
+        function stopRCP() { clearInterval(rcpInterval); }
+
+        function logRCPEvent(evt) {
+            const time = new Date().toLocaleTimeString();
+            const log = document.getElementById('rcpLog');
+            log.innerHTML += `<div>[${time}] ${evt}</div>`;
+            log.scrollTop = log.scrollHeight;
+        }
+
+        // Calculadora Glasgow Logic
+        function calcGlasgow() {
+            const o = parseInt(document.getElementById('glasgowOcular').value);
+            const v = parseInt(document.getElementById('glasgowVerbal').value);
+            const m = parseInt(document.getElementById('glasgowMotor').value);
+            const total = o + v + m;
+
+            document.getElementById('glasgowResult').innerText = `${total} / 15`;
+            let conduct = "Nível de consciência normal.";
+            if (total <= 8) conduct = "⚠️ Trauma Grave: Indicação de Intubação Orotraqueal (IOT).";
+            else if (total <= 12) conduct = "Trauma Moderado: Monitoramento contínuo.";
+            
+            document.getElementById('glasgowConduct').innerText = conduct;
+        }
+    </script>
 </body>
 </html>
